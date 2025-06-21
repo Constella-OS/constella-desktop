@@ -2,6 +2,8 @@
 
 Displays a private, detection-free window. 
 
+For the free direct download: https://www.onhorizon.ai/
+
 I guess you could use it for cheating, but please follow honor codes (hacking vs cheating). More so for your privacy and not to block your screen recordings.
 
 Uses our backend for now, but you can substitute in yours.
