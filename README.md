@@ -10,9 +10,8 @@ Uses our backend for now, but you can substitute in yours.
 
 ## Feedback / Contributing
 
-Please [reach out to me](https://x.com/taayjus)
+To contribute or with feedback, pls [reach out to me](https://x.com/tejasthesharma)
 
-Looking for people who want to build a solid, great product instead of releasing hundreds of clones.
 
 ## AI Context Manager
 
