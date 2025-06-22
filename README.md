@@ -10,7 +10,7 @@ Uses our backend for now, but you can substitute in yours.
 
 ## Feedback / Contributing
 
-To contribute or with feedback, pls [reach out to me](https://x.com/tejasthesharma)
+To contribute or with feedback, pls [reach out to me](https://x.com/tejasthesharma) (just made an X account for ease)
 
 
 ## AI Context Manager
