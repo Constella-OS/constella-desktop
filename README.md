@@ -8,10 +8,14 @@ I guess you could use it for cheating, but please follow honor codes (hacking vs
 
 Uses our backend for now, but you can substitute in yours.
 
+
 ## Feedback / Contributing
 
 To contribute or with feedback, pls [reach out to me](https://x.com/tejasthesharma) (just made an X account for ease)
 
+## License
+
+This has been available under a non-commercial license to benefit the public.
 
 ## AI Context Manager
 
