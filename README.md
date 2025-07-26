@@ -1,6 +1,6 @@
 ## Horizon Overlay: Open Source Cluely
 
-A positive AI overlay to empower you. Private, detection-free window. 
+An upbeat AI overlay to empower you. Private, detection-free window. 
 
 For the free direct download: https://www.onhorizon.ai/
 
