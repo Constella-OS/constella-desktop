@@ -1,6 +1,14 @@
 # Constella "JARVIS" Desktop
 
-Constella is a local-first desktop command center for your files, memories,
+## Coming Soon. Star this GitHub to be notified on launch
+
+<img width="372" height="183" alt="image" src="https://github.com/user-attachments/assets/79aed1f3-3852-4d97-9f7e-32b311e7d0f9" />
+
+➛ Or enter your email [here](https://constella.sh)
+
+## About this Project
+
+Constella is a free, open source, local-first desktop command center for your files, memories,
 agents, and workflows. It syncs folders you choose, builds a searchable local
 knowledge substrate, and uses local analysis jobs to turn scattered notes into
 connected concepts, themes, reminders, and recommendations.
@@ -8,7 +16,6 @@ connected concepts, themes, reminders, and recommendations.
 The goal is simple: one shared brain for your personal knowledge and agentic
 workflows.
 
-**Get your download at [constella.app](https://constella.app).**
 
 <img width="1795" height="1130" alt="Constella JARVIS desktop screenshot" src="https://github.com/user-attachments/assets/c91e999c-6883-4f00-876a-66e152e9c9f5" />
 
