@@ -16,9 +16,10 @@ workflows.
 
 Download that [here](https://constella.sh)
 
-A curated UI based on all our daily use testing and working with people that is the most useful.
+A curated UI based on all our daily use testing that we've found to be the most useful
+
 Plus:
-- Notion, Google Calendar, Slack, Gmail, Drive, and more integrations syncing in
+- Notion, Google Calendar, Slack, Gmail, Drive, and more integrations syncing in for automations there
 - Chrome Extension sidekick companion
 - Mobile assistant
 
