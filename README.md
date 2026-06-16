@@ -1,13 +1,6 @@
-### Star this GitHub to be notified on launch
-
-<img width="372" height="183" alt="image" src="https://github.com/user-attachments/assets/79aed1f3-3852-4d97-9f7e-32b311e7d0f9" />
-
-
-### 👉 Get the easy-to-install download [here](https://constella.sh)
-
 ## About this Project
 
-Constella is a free, open source, local-first desktop command center for your files, memories,
+Constella is a private, open source, local-first desktop command center for your files, memories,
 agents, and workflows. It syncs folders you choose, builds a searchable local
 knowledge substrate, and uses local analysis jobs to turn scattered notes into
 connected concepts, themes, reminders, and recommendations.
@@ -17,6 +10,17 @@ workflows.
 
 
 <img width="1795" height="1130" alt="Constella JARVIS desktop screenshot" src="https://github.com/user-attachments/assets/c91e999c-6883-4f00-876a-66e152e9c9f5" />
+
+
+### Want a simple download? 
+
+Download that [here](https://constella.sh)
+
+A curated UI based on all our daily use testing and working with people that is the most useful.
+Plus:
+- Notion, Google Calendar, Slack, Gmail, Drive, and more integrations syncing in
+- Chrome Extension sidekick companion
+- Mobile assistant
 
 ## What It Does
 
