@@ -1,0 +1,46 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Coverage
+coverage
+.eslintcache
+
+# Dependencies
+node_modules
+
+# OSX
+.DS_Store
+
+# Build output
+release/app/dist
+release/build
+.erb/dll
+dist/
+
+# Local databases
+/vectordb/*
+*.lance
+.manifest
+
+# Environment variables — copy .env.example to .env.local and fill in your values
+.env.local
+.env.sentry-build-plugin
+
+# Secrets
+env_vars.sh
+
+# package-lock (contributors use their own)
+package-lock.json
+
+# IDE
+.idea
+.vscode
+
+# Claude Code worktrees
+.claude/worktrees/
