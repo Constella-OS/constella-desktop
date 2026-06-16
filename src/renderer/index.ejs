@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!--
+      frame-src widely opened up so the AI Node's "open paper / article"
+      flow can render publisher pages (DOI resolvers, journals, arXiv,
+      university .edu sites, etc.) inside LinkSlidingPane's iframe. The
+      destination still controls X-Frame-Options / CSP frame-ancestors —
+      sites that refuse embedding fall through to LinkSlidingPane's
+      "Open in browser" affordance, so this allowance never silently
+      forces a frame to load against the destination site's policy.
+      Explicit common academic hosts listed for clarity / discoverability;
+      the trailing `https:` wildcard covers everything else (long tail
+      of less-common journals, thesis hosts, lab pages, etc.).
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://*.posthog.com https://d1o7k6e9m830r9.cloudfront.net https://d29f4v4r8cofie.cloudfront.net https://cdn.jsdelivr.net https://client.crisp.chat; worker-src 'self' data: blob:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://doi.org https://dx.doi.org https://arxiv.org https://www.arxiv.org https://biorxiv.org https://www.biorxiv.org https://medrxiv.org https://www.medrxiv.org https://ssrn.com https://papers.ssrn.com https://www.researchgate.net https://www.semanticscholar.org https://openreview.net https://paperswithcode.com https://zenodo.org https://hal.science https://philarchive.org https://www.jstor.org https://www.nature.com https://www.science.org https://www.sciencemag.org https://link.springer.com https://www.sciencedirect.com https://onlinelibrary.wiley.com https://www.tandfonline.com https://www.cambridge.org https://academic.oup.com https://journals.sagepub.com https://ieeexplore.ieee.org https://dl.acm.org https://aclanthology.org https://www.aclweb.org https://proceedings.neurips.cc https://papers.nips.cc https://proceedings.mlr.press https://jmlr.org https://www.jmlr.org https://pubmed.ncbi.nlm.nih.gov https://www.ncbi.nlm.nih.gov https://journals.plos.org https://www.frontiersin.org https://www.bmj.com https://bjsm.bmj.com https://*.bmj.com https://www.nejm.org https://www.thelancet.com https://www.cell.com https://www.pnas.org https://openalex.org https://api.openalex.org https://content.openalex.org https://scholar.google.com https://books.google.com https://*.edu https://*.ac.uk https://*.ac.jp https:;"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

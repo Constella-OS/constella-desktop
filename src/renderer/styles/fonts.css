@@ -1,0 +1,181 @@
+/* Avenir Next */
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 200;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-UltraLight.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 200;
+  font-style: italic;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-UltraLightIt.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 300;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-Thin.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 300;
+  font-style: italic;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-ThinItalic.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 400;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-Regular.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 400;
+  font-style: italic;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-Italic.ttf')
+      format('truetype');
+}
+
+/* 450 and 500 are the same one */
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 450;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-Medium.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 450;
+  font-style: italic;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-MediumItalic.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 500;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-Medium.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 500;
+  font-style: italic;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-MediumItalic.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 600;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-Demi.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 600;
+  font-style: italic;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-DemiItalic.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 700;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-Bold.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 700;
+  font-style: italic;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-BoldItalic.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 900;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-Heavy.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  font-weight: 900;
+  font-style: italic;
+  src:
+    local('Avenir Next'),
+    url('../../../assets/fonts/Avenir Next/AvenirNextCyr-HeavyItalic.ttf')
+      format('truetype');
+}
+
+/* Mono Fonts */
+@font-face {
+  font-family: 'Fira Mono';
+  font-weight: 400;
+  src:
+    local('Fira Mono'),
+    url('../../../assets/fonts/Fira Mono/FiraMono-Regular.ttf')
+      format('truetype');
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  font-weight: 100 900;
+  src:
+    local('Satoshi'),
+    url('../../../assets/fonts/Satoshi-Variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  font-style: italic;
+  font-weight: 100 900;
+  src:
+    local('Satoshi'),
+    url('../../../assets/fonts/Satoshi-VariableItalic.ttf') format('truetype');
+}

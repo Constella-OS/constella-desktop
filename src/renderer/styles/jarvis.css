@@ -1,0 +1,458 @@
+/* ==========================================================================
+   JARVIS — global HUD theme.
+   Ported from side-projects/agents-slack (src/renderer/jarvis.css): JetBrains
+   Mono + cyan (#00d4ff) accents on a near-black deep-sea base, with glow /
+   scanline HUD chrome.
+
+   HOW IT WORKS — one class, four token roots.
+   The dashboard (.cd-root), settings (.set-root) and library/capture
+   (.cnotes / .cnx) surfaces all consume the SAME design-token names
+   (--app-bg, --ink-hi/-mid/-lo/-faint, --teal/--accent, --card-*, --panel-*,
+   --chip-*, --font-*). So when `settings.theme === 'Jarvis'` we add a `jarvis`
+   class to <html> (see SettingsContext) and re-map those tokens here — every
+   one of those surfaces (home, agents, instructions, settings, capture) flips
+   to the HUD palette at once, with no per-component edits. The canvas nodes
+   (.customNode) + the global body chrome are handled with explicit rules
+   below; the search palette is branched in SlashOverlay.tsx.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ---- the Jarvis palette (single source of truth) -------------------------- */
+html.jarvis {
+  --jv-b0: #000814; /* deep background */
+  --jv-b1: #001a33; /* secondary background */
+  --jv-accent: #00d4ff; /* primary cyan accent */
+  --jv-accent-2: #5ddef4; /* secondary cyan */
+  --jv-accent-3: #b6ecff; /* light cyan (text glow) */
+  --jv-accent-deep: #006eaa; /* deep blue accent */
+
+  --jv-ink-hi: #e7f6fb;
+  --jv-ink-mid: #8fb3bf;
+  --jv-ink-lo: #5f7d88;
+  --jv-ink-faint: #46606b;
+
+  --jv-panel: rgba(0, 26, 51, 0.55);
+  --jv-panel-edge: rgba(93, 222, 244, 0.4);
+  --jv-line: rgba(93, 222, 244, 0.14);
+  --jv-line-soft: rgba(93, 222, 244, 0.08);
+  --jv-card: rgba(0, 212, 255, 0.045);
+  --jv-card-2: rgba(0, 212, 255, 0.02);
+
+  --jv-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, monospace;
+
+  --jv-good: #7cffb2;
+  --jv-warn: #ffcc33;
+  --jv-danger: #ff4d6d;
+}
+
+/* ==========================================================================
+   1. Global body chrome — deep-sea base + grid + scanlines + vignette.
+   Body carries the app's invert chain, so we set TRUE colors here (same as
+   the Cosmos/SeaGreen helpers do via document.body.style.background).
+   ========================================================================== */
+html.jarvis,
+html.jarvis body {
+  font-family: var(--jv-mono);
+}
+
+/* faint HUD grid + scanlines, painted under everything, never interactive. */
+html.jarvis body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(0, 212, 255, 0.05) 1px,
+      transparent 1px
+    );
+  background-size: 26px 26px;
+  opacity: 0.6;
+}
+html.jarvis body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 212, 255, 0.03) 0,
+    rgba(0, 212, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: screen;
+  box-shadow: inset 0 0 240px rgba(0, 0, 0, 0.85);
+}
+
+/* ==========================================================================
+   2. Shared-token re-map. This is what re-skins home / agents / instructions /
+   settings / capture in one shot.
+   ========================================================================== */
+html.jarvis .cd-root,
+html.jarvis .set-root,
+html.jarvis .cnotes,
+html.jarvis .cnx {
+  /* base */
+  --app-bg: var(--jv-b0);
+  --panel-bg: rgba(0, 20, 40, 0.92);
+  --panel-line: var(--jv-line);
+  --panel-line-soft: var(--jv-line-soft);
+
+  /* cards */
+  --card-bg: var(--jv-card);
+  --card-line: var(--jv-line);
+  --card-line-hi: var(--jv-panel-edge);
+
+  /* ink */
+  --ink-hi: var(--jv-ink-hi);
+  --ink-mid: var(--jv-ink-mid);
+  --ink-lo: var(--jv-ink-lo);
+  --ink-faint: var(--jv-ink-faint);
+
+  /* accents — .cd-root/.set-root use --teal, .cnotes/.cnx use --accent */
+  --teal: var(--jv-accent);
+  --accent: var(--jv-accent);
+  --accent-soft: rgba(0, 212, 255, 0.12);
+  --accent-glow: rgba(0, 212, 255, 0.4);
+
+  /* chips */
+  --chip-bg: rgba(0, 212, 255, 0.1);
+  --chip-fg: var(--jv-accent-2);
+
+  --danger: var(--jv-danger);
+  --danger-soft: rgba(255, 77, 109, 0.14);
+
+  /* type — flip everything to mono */
+  --font-display: var(--jv-mono);
+  --font-ui: var(--jv-mono);
+}
+
+/* the deep-sea gradient base for the full-bleed surfaces */
+html.jarvis .cd-root,
+html.jarvis .set-root {
+  background:
+    radial-gradient(120% 120% at 18% -10%, rgba(0, 212, 255, 0.12) 0%, rgba(0, 8, 20, 0) 50%),
+    radial-gradient(110% 120% at 92% 118%, rgba(0, 110, 170, 0.14) 0%, rgba(0, 8, 20, 0) 48%),
+    linear-gradient(165deg, #001523 0%, #000814 62%);
+}
+
+/* ==========================================================================
+   3. HUD accents inside the re-skinned surfaces — cyan glow + crisp hairlines.
+   Kept light-touch so it reads as Jarvis without fighting the existing layout.
+   ========================================================================== */
+
+/* logos / brand marks / big headings get the signature cyan text-glow */
+html.jarvis .cd-app-logo,
+html.jarvis .cd-brand,
+html.jarvis .set-title,
+html.jarvis .cnx .exp-title,
+html.jarvis .cd-hero-title {
+  color: var(--jv-ink-hi);
+  text-shadow: 0 0 14px rgba(0, 212, 255, 0.45);
+}
+
+/* primary cyan affordances (pills / send buttons / active tabs) glow softly */
+html.jarvis .cd-root [class*='primary'],
+html.jarvis .cd-root .cd-cta,
+html.jarvis .set-root .set-primary {
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.18);
+}
+
+/* letter-spacing on uppercase HUD labels reads more "instrument panel" */
+html.jarvis .cd-section-label,
+html.jarvis .set-tab,
+html.jarvis .pop-section {
+  letter-spacing: 0.12em;
+}
+
+/* hero ask box (.cd-ask) hardcodes its own bg/border, so re-skin it explicitly
+   into a cyan HUD console with a soft inner glow. */
+html.jarvis .cd-ask {
+  background:
+    radial-gradient(120% 140% at 18% -10%, rgba(0, 212, 255, 0.1) 0%, rgba(0, 8, 20, 0) 55%),
+    radial-gradient(90% 120% at 85% 120%, rgba(0, 110, 170, 0.12) 0%, rgba(0, 8, 20, 0) 50%),
+    linear-gradient(180deg, rgba(0, 24, 44, 0.6) 0%, rgba(0, 12, 24, 0.6) 100%) !important;
+  border: 1px solid rgba(93, 222, 244, 0.22) !important;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(0, 212, 255, 0.06) inset !important;
+}
+html.jarvis .cd-ask:focus-within {
+  border-color: rgba(0, 212, 255, 0.55) !important;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 212, 255, 0.3),
+    0 0 40px rgba(0, 212, 255, 0.12),
+    inset 0 8px 30px rgba(0, 212, 255, 0.08) !important;
+}
+html.jarvis .cd-ask-q {
+  color: var(--jv-ink-hi) !important;
+  font-family: var(--jv-mono) !important;
+}
+html.jarvis .cd-ask-q::placeholder {
+  color: var(--jv-ink-lo) !important;
+}
+
+/* scrollbars → thin cyan */
+html.jarvis .cd-root *::-webkit-scrollbar-thumb,
+html.jarvis .set-root *::-webkit-scrollbar-thumb,
+html.jarvis .cnx *::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.18);
+}
+
+/* ==========================================================================
+   4. CANVAS NODES.
+   Per the "Constella Node (Dark)" design, recolored to the Jarvis palette but
+   KEEPING the existing node sizes (we only restyle color/border/glow/type, not
+   geometry). The card background comes from getNoteCardBackgroundColor()'s
+   Jarvis branch; here we override the inline border / glow / text / font.
+
+   IMPORTANT — scope the card CHROME (border / shadow / blur) to the real
+   NoteCard only. NoteCard's wrapper IS the visible card and renders a rich
+   className ("flex flex-col cursor-move … customNode …"), whereas AINode,
+   AIInsightNode and NoteBodyCard render a BARE `className="customNode"` wrapper
+   that only positions their own inner card. Painting border/shadow/blur on those
+   bare wrappers drew a second "ghost" box around those nodes. `:not([class='customNode'])`
+   matches NoteCard (extra classes) and skips the bare wrappers. The text/color
+   rules below stay broad — harmless, since the AI nodes set their own fonts/colors. */
+html.jarvis .customNode:not([class='customNode']) {
+  border: 1px solid rgba(198, 242, 240, 0.16) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 14px 38px rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+/* selected / connecting node → aquatic-teal ring + outer glow (design values) */
+html.jarvis .customNode.selected,
+html.jarvis .customNode.animate-shake {
+  border-color: rgba(30, 200, 210, 0.42) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.07) inset,
+    0 0 0 1px rgba(30, 200, 210, 0.18),
+    0 16px 44px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(30, 200, 210, 0.1) !important;
+}
+
+/* node text → cyan-tinted ink. We recolor to the HUD palette but deliberately
+   KEEP the dark-mode canvas typeface ('Avenir Next') instead of the global
+   Jarvis mono — the canvas + NoteCard read better in the sans face, while every
+   other surface (home / settings / agents / capture) stays mono. */
+html.jarvis .customNode,
+html.jarvis .customNode .note-card-area,
+html.jarvis .customNode [contenteditable],
+html.jarvis .customNode textarea {
+  color: var(--jv-ink-hi) !important;
+  font-family: 'Avenir Next', sans-serif !important;
+  text-shadow: none !important;
+}
+html.jarvis .customNode [contenteditable]::placeholder,
+html.jarvis .customNode textarea::placeholder {
+  color: var(--jv-ink-faint) !important;
+}
+
+/* the AI suggestion / connection pills around a node → glassy cyan HUD pills,
+   also in the dark-mode canvas typeface (not mono) to match the node text. */
+html.jarvis .customNode [class*='Pill'],
+html.jarvis .customNode [class*='pill'] {
+  font-family: 'Avenir Next', sans-serif !important;
+}
+
+/* The canvas surface itself — the "Constella Node (Dark)" design's teal
+   deep-sea stage (distinct from the cyan app chrome). Painted on the React-Flow
+   root so nodes float over it. */
+html.jarvis .react-flow {
+  background-color: #04181c !important;
+  background-image:
+    radial-gradient(120% 120% at 18% -10%, rgba(0, 150, 160, 0.18) 0%, rgba(4, 24, 28, 0) 50%),
+    radial-gradient(110% 120% at 92% 118%, rgba(0, 128, 123, 0.15) 0%, rgba(4, 24, 28, 0) 48%),
+    linear-gradient(165deg, #062227 0%, #04181c 60%) !important;
+  /* the canvas keeps the dark-mode sans typeface, not the global Jarvis mono —
+     so any canvas chrome that inherits from the React-Flow root (not just the
+     .customNode text handled above) matches NoteCard's dark-mode font. */
+  font-family: 'Avenir Next', sans-serif !important;
+}
+
+/* react-flow edges between connected nodes → dashed aquatic teal (design) */
+html.jarvis .react-flow__edge-path {
+  stroke: rgba(30, 200, 210, 0.5) !important;
+  stroke-width: 1.5 !important;
+  stroke-dasharray: 5 6 !important;
+}
+html.jarvis .react-flow__selection,
+html.jarvis .react-flow__nodesselection-rect {
+  background: rgba(30, 200, 210, 0.16) !important;
+  fill: rgba(30, 200, 210, 0.16) !important;
+}
+
+/* ==========================================================================
+   5. TOP BAR — Search / Capture / + Index Data / integrations / gear pills.
+   These hardcode #20262a borders + rgba(14,18,20) fills, so re-skin them into
+   cyan HUD chips with a mono label and a hover glow.
+   ========================================================================== */
+html.jarvis .cd-tb-pill,
+html.jarvis .cd-integrations,
+html.jarvis .cd-gear {
+  border: 1px solid rgba(93, 222, 244, 0.22) !important;
+  background: rgba(0, 20, 38, 0.6) !important;
+  color: var(--jv-ink-mid) !important;
+  font-family: var(--jv-mono) !important;
+}
+html.jarvis .cd-tb-pill:hover,
+html.jarvis .cd-integrations:hover,
+html.jarvis .cd-gear:hover {
+  border-color: rgba(0, 212, 255, 0.5) !important;
+  background: rgba(0, 212, 255, 0.08) !important;
+  color: var(--jv-ink-hi) !important;
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.12) !important;
+}
+html.jarvis .cd-tb-pill .cd-kbd {
+  border-color: rgba(93, 222, 244, 0.3) !important;
+  color: var(--jv-accent-2) !important;
+}
+html.jarvis .cd-int-label {
+  color: var(--jv-ink-mid) !important;
+  font-family: var(--jv-mono) !important;
+}
+
+/* ==========================================================================
+   6. AGENTS panel — deploy button → dashed cyan HUD affordance.
+   (The agent cards already carry per-agent accent rails inline, which read fine
+   on the HUD; we just lift the deploy button + section chrome to cyan.)
+   ========================================================================== */
+html.jarvis .cd-ag-deploy {
+  border: 1px dashed rgba(93, 222, 244, 0.35) !important;
+  background: rgba(0, 212, 255, 0.06) !important;
+  color: var(--jv-accent-2) !important;
+  letter-spacing: 0.08em;
+}
+html.jarvis .cd-ag-deploy:hover {
+  border-color: var(--jv-accent) !important;
+  color: var(--jv-accent) !important;
+  background: rgba(0, 212, 255, 0.1) !important;
+  text-shadow: 0 0 6px rgba(0, 212, 255, 0.5) !important;
+}
+
+/* ==========================================================================
+   7. ALERTS panel — turn the solid "Join the waitlist" CTA into the agents-slack
+   glassy cyan pill, and recolor the "you're on the list" confirmation box.
+   ========================================================================== */
+html.jarvis .cd-alerts-cta {
+  background: rgba(0, 212, 255, 0.1) !important;
+  border: 1px solid rgba(93, 222, 244, 0.55) !important;
+  color: var(--jv-accent-3) !important;
+  font-family: var(--jv-mono) !important;
+  letter-spacing: 0.14em;
+  box-shadow: 0 0 22px rgba(0, 212, 255, 0.14) !important;
+}
+html.jarvis .cd-alerts-cta:hover {
+  background: rgba(0, 212, 255, 0.18) !important;
+  border-color: var(--jv-accent) !important;
+  color: var(--jv-ink-hi) !important;
+}
+html.jarvis .cd-alerts-joined {
+  background: rgba(0, 212, 255, 0.08) !important;
+  border-color: rgba(0, 212, 255, 0.3) !important;
+}
+
+/* ==========================================================================
+   8. SIDE PANEL CHROME — agents sidebar/panel + alerts column.
+   These hardcode flat near-black fills (#0b0e10 / #0a0d0f), so re-skin them
+   into the agents-slack HUD panel: translucent deep-navy surface, cyan edge,
+   inset cyan glow, a glowing gradient header bar, and corner brackets.
+   ========================================================================== */
+html.jarvis .cd-ag-sidebar,
+html.jarvis .cd-ag-panel,
+html.jarvis .cd-alerts {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 26, 51, 0.62) 0%,
+    rgba(0, 12, 24, 0.62) 100%
+  ) !important;
+  border-color: rgba(93, 222, 244, 0.28) !important;
+  box-shadow:
+    0 0 32px rgba(0, 212, 255, 0.06) inset,
+    0 0 24px rgba(0, 212, 255, 0.05) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+}
+/* the sidebar / alerts keep a single seam border — make it cyan */
+html.jarvis .cd-ag-sidebar {
+  border-right: 1px solid rgba(93, 222, 244, 0.28) !important;
+}
+html.jarvis .cd-alerts {
+  border-left: 1px solid rgba(93, 222, 244, 0.28) !important;
+}
+
+/* corner brackets — the signature HUD L-marks (decorative, non-interactive) */
+html.jarvis .cd-ag-sidebar::before,
+html.jarvis .cd-ag-sidebar::after,
+html.jarvis .cd-alerts::before,
+html.jarvis .cd-alerts::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--jv-accent);
+  pointer-events: none;
+  z-index: 2;
+}
+html.jarvis .cd-ag-sidebar::before,
+html.jarvis .cd-alerts::before {
+  top: 5px;
+  left: 5px;
+  border-right: none;
+  border-bottom: none;
+}
+html.jarvis .cd-ag-sidebar::after,
+html.jarvis .cd-alerts::after {
+  bottom: 5px;
+  right: 5px;
+  border-left: none;
+  border-top: none;
+}
+
+/* glowing gradient header bars */
+html.jarvis .cd-ag-side-head,
+html.jarvis .cd-alerts-pane-head {
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.14), transparent) !important;
+  border-bottom: 1px solid rgba(93, 222, 244, 0.22) !important;
+}
+html.jarvis .cd-ag-side-title,
+html.jarvis .cd-alerts-pane-label {
+  color: var(--jv-accent) !important;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5) !important;
+}
+
+/* ==========================================================================
+   9. HOME-DISCOVERY SPLIT — LEFT CHAT PANEL (.cd-recall-chat).
+   When you enter a project from the home ask box, the left column is the recall
+   chat. By default it inherits the cyan/blue .cd-root gradient, which clashes
+   with the green deep-sea stage the canvas (.react-flow) uses on the right.
+
+   Re-skin the left column to the SAME teal-green as the canvas — it derives
+   from the canvas's exact base (#04181c) + the same teal radial accents, only
+   nudged a hair lighter (base #05191e / gradient top #082a2f). This mirrors how
+   the dark theme handles it: there the chat (--app-bg #080a0b) is just one step
+   lighter than the canvas (#070a0b), so the two read as one continuous surface
+   with a barely-perceptible seam. Kept sleek (thin lines, low-noise) to match. */
+html.jarvis .cd-recall-chat {
+  background-color: #05191e !important;
+  background-image:
+    radial-gradient(120% 120% at 18% -10%, rgba(0, 150, 160, 0.18) 0%, rgba(5, 25, 30, 0) 50%),
+    radial-gradient(110% 120% at 92% 118%, rgba(0, 128, 123, 0.15) 0%, rgba(5, 25, 30, 0) 48%),
+    linear-gradient(165deg, #082a2f 0%, #05191e 60%) !important;
+  border-right: 1px solid rgba(30, 200, 210, 0.26) !important;
+  box-shadow:
+    inset -1px 0 0 rgba(30, 200, 210, 0.08),
+    inset 0 0 60px rgba(0, 150, 160, 0.05) !important;
+}
+/* streaming dots + send affordances in the chat → teal to match the canvas */
+html.jarvis .cd-recall-chat .cd-streaming span {
+  background: #1ec8d2 !important;
+}

@@ -1,0 +1,714 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Manrope:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--font-family);
+  }
+}
+
+:root {
+  --html-font-size: 14px;
+  --font-family: 'Avenir Next', system-ui, -apple-system, sans-serif;
+
+  /* Constella canvas tokens — design handoff (recreation/project/colors_and_type.css). */
+  --font-display: 'Manrope', 'Google Sans Flex', 'DM Sans', -apple-system, system-ui, sans-serif;
+  --font-ui: 'Google Sans Flex', 'Google Sans', 'DM Sans', 'Manrope', -apple-system, system-ui, sans-serif;
+
+  --c-teal-900: #00464a;
+  --c-teal-700: #00807b;
+  --c-teal-600: #009994;
+  --c-teal-500: #0096a0;
+  --c-teal-100: #b5e5ff;
+  --c-teal-glow: rgba(0, 150, 160, 0.1);
+  --c-teal-glow-strong: rgba(0, 150, 160, 0.2);
+
+  --c-bg: #efeeed;
+  --c-bg-2: #eff0f1;
+  --c-surface: #fafafa;
+  --c-surface-mute: #ececee;
+  --c-chip: #e3e2e0;
+  --c-divider: #d9d9d9;
+
+  --c-glass-light: rgba(255, 255, 255, 0.78);
+  --c-glass-light-hi: rgba(255, 255, 255, 0.95);
+  --c-glass-edge: #ffffff;
+
+  --c-ink-1: #000000;
+  --c-ink-2: #4c4c4c;
+  --c-ink-3: #a3a3a3;
+
+  --c-yellow-bg: #fff6d3;
+  --c-yellow-fg: #e7850e;
+
+  --r-input: 8px;
+  --r-tile: 10px;
+  --r-card: 16px;
+  --r-pill: 14px;
+
+  --sh-card: 0 1px 2px rgba(0, 0, 0, 0.06), 0 2px 10px rgba(0, 0, 0, 0.04);
+  --sh-pill: 0 4px 14px rgba(0, 0, 0, 0.06);
+  --sh-lift: 0 1px 2px rgba(0, 0, 0, 0.04), 0 14px 36px rgba(0, 0, 0, 0.08);
+
+  --blur-glass: blur(18px);
+  --blur-modal: blur(24px);
+
+  --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);
+  --d-fast: 140ms;
+  --d-base: 180ms;
+  --d-slow: 280ms;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem !important;
+  height: 0.5rem !important;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+  /* margin-top: 10px;
+  margin-bottom: 10px; */
+}
+::-webkit-scrollbar-thumb {
+  height: 0.5rem !important;
+  width: 0.5rem !important;
+  border-radius: 0.125rem !important;
+  border: 0.3px solid rgba(255, 255, 255, 0.5) !important;
+  background: var(--overlay-white-5, rgba(255, 255, 255, 0.09)) !important;
+}
+
+::-webkit-scrollbar-button {
+  width: 10px;
+  height: 10px;
+}
+
+/* Hide scrollbars but keep overflow scrolling (e.g. horizontal tab strips). */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow-x: hidden;
+  filter: invert(1);
+  background-color: white;
+}
+
+body {
+  position: relative;
+  color: white;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  /* background: linear-gradient(
+    31deg,
+    rgba(13, 40, 47, 0.98) 0%,
+    rgba(55, 89, 89, 0.98) 44%,
+    rgba(120, 154, 156, 0.98) 94%
+  ); */
+  /* Alternate: dark green gradient background: linear-gradient(9deg, rgba(14,49,70,0.94) 0%, rgba(22,71,91,0.94) 100%); */
+  /*
+    Alternate: green gradient 1
+    background: rgb(5,13,14);
+    background: linear-gradient(45deg, rgba(5,13,14,1) 0%, rgba(49,79,78,1) 58%, rgba(94,117,116,1) 100%);
+  */
+  background: transparent;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* -webkit-app-region: drag; */
+}
+
+/* Only show grabbable cursor when alternate mouse controls are enabled */
+.alternate-mouse-controls .react-flow__pane {
+  cursor: grab !important;
+}
+
+/* Only show grabbing cursor when alternate mouse controls are enabled */
+.alternate-mouse-controls .react-flow__pane.dragging {
+  cursor: grabbing !important;
+}
+
+/* ******* Prevent Dragging Components ******* */
+
+button {
+  -webkit-app-region: no-drag; /* Prevent dragging */
+}
+svg {
+  -webkit-app-region: no-drag; /* Prevent dragging */
+}
+
+/*
+.titlebar {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+} */
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  height: fit-content;
+  width: fit-content;
+}
+
+a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.card-header {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+.card-content {
+  font-size: 0.9em;
+}
+
+input {
+  -webkit-app-region: no-drag;
+}
+
+.context-menu {
+  background: white;
+  border-style: solid;
+  box-shadow: 10px 19px 20px rgba(0, 0, 0, 10%);
+  position: absolute;
+  z-index: 10;
+  color: black;
+}
+
+.context-menu button {
+  border: none;
+  display: block;
+  padding: 0.5em;
+  text-align: left;
+  width: 100%;
+}
+
+.context-menu button:hover {
+  background: white;
+}
+
+.react-flow-collapsed {
+  width: 60% !important; /* Adjust the width to be 100% - daily note width */
+}
+
+.react-flow__attribution {
+  display: none !important;
+}
+
+div.customHandle {
+  width: 100%;
+  height: 100%;
+  background: black;
+  position: absolute;
+  top: 0%;
+  left: 0;
+  border-radius: 0;
+  transform: none;
+  border: none;
+  opacity: 0;
+}
+
+.react-flow__handle {
+  background: transparent;
+  border-radius: 0;
+  border: 0;
+  height: 100%;
+  right: 0;
+  width: 50%;
+}
+
+.react-flow__handle::after {
+  background-color: white;
+  border-radius: 100%;
+  /* border: 2px solid black; */
+  content: '';
+  display: block;
+  height: 1.4rem;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 1.4rem;
+}
+
+/* Connection handles on AI nodes: hidden until the node is hovered, then a small teal dot appears so the user can drag a fresh edge to another node. */
+.ai-node-handle {
+  width: 12px !important;
+  height: 12px !important;
+  background: var(--c-teal-500, #0096a0) !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 999px !important;
+  opacity: 0;
+  transition: opacity var(--d-base, 180ms) var(--ease-calm, ease);
+  z-index: 25;
+}
+.ai-node-handle.bottom { bottom: -6px !important; left: 50% !important; transform: translateX(-50%) !important; }
+.ai-node-handle.left { left: -6px !important; top: 50% !important; transform: translateY(-50%) !important; }
+.ai-node-handle.right { right: -6px !important; top: 50% !important; transform: translateY(-50%) !important; }
+.ai-node-handle.top { top: -6px !important; left: 50% !important; transform: translateX(-50%) !important; }
+.ai-node-handle::after { display: none !important; }
+.react-flow__node:hover > .ai-node-handle,
+.react-flow__node.selected > .ai-node-handle,
+.react-flow__node:hover .ai-node-handle,
+.react-flow__node.selected .ai-node-handle { opacity: 1; }
+
+.transition {
+  transition: all 1.5s ease-in-out;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.transition.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dragTopWindow {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+
+.mainSearchBar {
+  -webkit-app-region: drag;
+}
+
+.main-search-bar-focused {
+  box-shadow:
+    0px 0px 32px 0px rgba(255, 255, 255, 0.25),
+    0px 16px 32px 0px rgba(255, 255, 255, 0.11) inset !important;
+}
+
+.searchBarInput {
+  color: #fff !important;
+}
+
+.searchBarInput::placeholder {
+  color: rgba(255, 255, 255, 0.59);
+}
+
+.small-input::placeholder {
+  font-size: 1.15rem !important;
+}
+
+/* Home memories hero search bar — placeholder must match the enlarged input
+   text (30% over base). Overrides the .small-input placeholder cap above. */
+.small-input.hero-search-input::placeholder {
+  font-size: 1.69rem !important;
+}
+
+.searchBarInputLight::placeholder {
+  color: rgba(0, 0, 0, 0.48) !important;
+}
+
+.searchBarInputLight {
+  color: #000 !important;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea::placeholder {
+  color: silver;
+  opacity: 1; /* Firefox */
+}
+
+textarea::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: silver;
+}
+
+.resizeable-text-area {
+  border: 0 none;
+  overflow: hidden; /*overflow is set to auto at max height using JS */
+  background: lightcyan;
+  font-family: sans-serif;
+  outline: none;
+  height: auto;
+  resize: none;
+  width: 100%;
+}
+
+.note-expand-title-text-area {
+  min-height: 1.41rem;
+}
+
+/**
+  * Graph Setting Sliders
+  */
+
+.graphSettingSlider {
+  -webkit-appearance: none;
+  outline: none;
+  overflow: hidden;
+  -webkit-app-region: no-drag;
+}
+.graphSettingSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 4px solid #c2c2c2;
+  background: #c2c2c2;
+}
+
+/* Editor */
+.rsw-editor {
+  min-height: 40vh;
+  max-height: 60vh;
+  background: none !important;
+  border: none !important;
+}
+
+.rsw-toolbar {
+  border: none !important;
+  background: none !important;
+  background-color: none;
+}
+
+.rsw-btn {
+  color: white !important;
+  width: 1.5em !important;
+}
+
+.rsw-ce {
+  border: none !important;
+  max-height: 90% !important;
+  overflow-y: scroll !important;
+  background: none !important;
+}
+
+/* Sliding Pane */
+
+.slide-pane__overlay {
+  pointer-events: none;
+}
+
+.slide-pane {
+  background: none !important;
+  border-radius: 10px;
+  border: none;
+  pointer-events: none;
+}
+
+.slide-pane__header {
+  opacity: 0;
+  pointer-events: none;
+  border-bottom-right-radius: 10px;
+  border-bottom: 2px solid black;
+  display: none !important;
+}
+
+/* rgba(13, 40, 47, 0.97) 0%,
+rgba(55, 89, 89, 0.97) 44%,
+rgba(120, 154, 156, 0.97) 94%  */
+
+.slide-pane__content {
+  pointer-events: all;
+  padding: 0 !important;
+  overflow-x: hidden;
+}
+
+.note-card-area {
+  margin-top: 16px !important;
+}
+
+.circle-picker {
+  width: 210px !important;
+}
+
+.subscription-key-input::placeholder {
+  color: rgba(209, 213, 219, 1) !important;
+}
+
+.onboarding-q3-creator-input::placeholder {
+  color: rgba(255, 255, 255, 0.42) !important;
+}
+
+/* Snackbar */
+
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  max-height: fit-content;
+  height: fit-content;
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #fff; /* Black background color */
+  color: black; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  transform: translate(-25%, 0);
+  top: 100px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation:
+    fadein 0.5s,
+    fadeout 0.5s 2.5s;
+  animation:
+    fadein 0.5s,
+    fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+.slide-pane__overlay.overlay-after-open {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Prompt animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.ReactModal__Content--after-open::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.settings-select-option:hover {
+  border-radius: 8px;
+  background: rgba(121, 145, 146, 0.2);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.settings-select-option-dark:hover {
+  border-radius: 8px;
+  background: rgba(116, 117, 117, 0.2);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.settings-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border: 0.38px solid rgba(255, 255, 255, 0.5);
+  transition: all 500ms ease-in-out;
+}
+
+.settings-button-dark:hover {
+  background: rgba(116, 117, 117, 0.3);
+  border: 0.38px solid rgba(116, 117, 117, 0.5);
+  transition: all 500ms ease-in-out;
+}
+
+.search-type-option-light:hover {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+#tutorial-link {
+  color: #0076bb !important; /* A darker blue that provides better contrast */
+}
+
+@keyframes floatUpFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float-up {
+  animation: floatUpFadeIn 1.5s ease-out forwards;
+}
+
+.theme-option:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.customNode {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-1.1deg);
+  }
+  75% {
+    transform: rotate(1.1deg);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out infinite;
+}
+
+.react-flow__selection {
+  fill: rgba(0, 89, 220, 0.25);
+}
+
+.react-flow__nodesselection-rect {
+  background: rgba(0, 89, 220, 0.25);
+}
+
+/* Was trying to replace the default dropdown arrow with a custom one */
+/* select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+select {
+  background-image: url('../../../assets/img/icons/dropdown-icon.svg');
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 8px) center;
+} */
+
+@keyframes fadeOutBorder {
+  0% {
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.05);
+  }
+  100% {
+    border: 2px solid rgba(255, 255, 255, 0);
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.animate-fade-out-border {
+  animation: fadeOutBorder 2s ease-out forwards;
+}
+
+@keyframes fadeOutBorderCosmos {
+  0% {
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.05);
+  }
+  100% {
+    border: 2px solid rgba(255, 255, 255, 0);
+    box-shadow: none;
+  }
+}
+
+.animate-fade-out-border-cosmos {
+  animation: fadeOutBorderCosmos 2s ease-out forwards;
+}
+
+/* Light-mode SVG inversion — opt-in only.
+   Previously every `.light-mode svg` was inverted globally, which broke any
+   component that computed its own theme-aware colors (TopRightBar icons, React
+   Flow edges, etc). Now an SVG must explicitly ask for the flip via the
+   `invert-in-light-mode` class, either on the SVG/img itself or on any
+   ancestor wrapper that contains a cluster of icons. The wrapper itself is
+   NOT inverted — only its SVG/img descendants — so borders / backgrounds on
+   the wrapper stay untouched. */
+.light-mode svg.invert-in-light-mode,
+.light-mode img.invert-in-light-mode[src$='.svg'],
+.light-mode .invert-in-light-mode svg,
+.light-mode .invert-in-light-mode img[src$='.svg'] {
+  filter: invert(1);
+}
+
+/* Hide Crisp's default launcher (the blue speech-bubble / close-X button).
+   DashboardHome paints its own minimal grey-outline button (.dh-crisp-launcher)
+   and opens the chat via API in src/utils/crisp.ts. The chat iframe panel
+   itself stays visible — it has its own internal close button — so users can
+   still dismiss the conversation. Crisp DOM lives outside our app root, so
+   this rule has to be global. Multiple selectors guard against Crisp's
+   class-name churn between SDK releases. */
+#crisp-chatbox > div > a,
+#crisp-chatbox > div > button,
+.crisp-client > div > a,
+.crisp-client > div > button,
+#crisp-chatbox a[role="button"][aria-label],
+.crisp-client a[role="button"][aria-label] {
+  display: none !important;
+}

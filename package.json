@@ -1,0 +1,388 @@
+{
+  "name": "Constella",
+  "version": "2.3.1",
+  "description": "Constella: the modern way to take notes and actually do things with them.",
+  "homepage": "./",
+  "license": "MIT",
+  "author": {
+    "name": "Beemo AI",
+    "email": "hey@beemo.ai",
+    "url": "https://beemo.ai"
+  },
+  "main": "./src/main/main.ts",
+  "scripts": {
+    "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
+    "build:dll": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.dev.dll.ts --stats",
+    "build:main": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.main.prod.ts --stats",
+    "build:renderer": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.prod.ts",
+    "postinstall": "ts-node .erb/scripts/check-native-dep.js && electron-builder install-app-deps && npm run build:dll",
+    "lint": "cross-env NODE_ENV=development eslint . --ext .js,.jsx,.ts,.tsx",
+    "package-dev": "cross-env NODE_ENV=development ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish never --arm64 && npm run build:dll",
+    "package": "cross-env NODE_ENV=production ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish never --arm64 && npm run build:dll",
+    "release": "cross-env NODE_ENV=production ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish always --arm64 && npm run build:dll && ./sentry.sh",
+    "package-others": "ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build -wl --publish never && npm run build:dll",
+    "release-others": "cross-env NODE_ENV=production ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build -wl --publish always && npm run build:dll",
+    "package-win": "ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build -w --publish never && npm run build:dll",
+    "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
+    "start": "cross-env NODE_ENV=development ts-node ./.erb/scripts/check-port-in-use.js && npm run start:renderer",
+    "start:main": "cross-env NODE_ENV=development NODE_OPTIONS=--import=tsx electronmon . --inspect=9229",
+    "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.preload.dev.ts",
+    "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts",
+    "test": "jest",
+    "format": "npx prettier --write ."
+  },
+  "browserslist": [],
+  "prettier": {
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": [
+          ".prettierrc",
+          ".eslintrc"
+        ],
+        "options": {
+          "parser": "json"
+        }
+      }
+    ]
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "release/app/node_modules",
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "json"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.erb/mocks/fileMock.js",
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+    },
+    "setupFiles": [
+      "./.erb/scripts/check-build-exists.ts"
+    ],
+    "testEnvironment": "jsdom",
+    "testEnvironmentOptions": {
+      "url": "http://localhost/"
+    },
+    "testPathIgnorePatterns": [
+      "release/app/dist",
+      ".erb/dll",
+      "web"
+    ],
+    "transform": {
+      "\\.(ts|tsx|js|jsx)$": "ts-jest"
+    }
+  },
+  "dependencies": {
+    "@bonniernews/json-autocomplete": "^0.0.14",
+    "@hocuspocus/provider": "^2.13.7",
+    "@jam.dev/sdk": "^0.0.6",
+    "@lancedb/lancedb": "^0.19.0",
+    "@microsoft/fetch-event-source": "^2.0.1",
+    "@nangohq/frontend": "^0.70.1",
+    "@prezly/slate-lists": "^0.109.0",
+    "@radix-ui/react-menubar": "^1.1.7",
+    "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
+    "@rive-app/react-canvas": "^4.16.7",
+    "@sentry/electron": "^5.7.0",
+    "@sentry/react": "^8.42.0",
+    "@tiptap-pro/extension-drag-handle": "^2.17.4",
+    "@tiptap-pro/extension-drag-handle-react": "^2.17.4",
+    "@tiptap-pro/extension-file-handler": "^2.11.3",
+    "@tiptap-pro/extension-mathematics": "^2.14.0",
+    "@tiptap-pro/extension-node-range": "^2.17.4",
+    "@tiptap-pro/extension-unique-id": "^2.17.3",
+    "@tiptap/extension-code-block-lowlight": "^2.11.5",
+    "@tiptap/extension-collaboration": "^2.11.5",
+    "@tiptap/extension-color": "^2.9.1",
+    "@tiptap/extension-history": "^2.11.3",
+    "@tiptap/extension-image": "^2.7.2",
+    "@tiptap/extension-link": "^2.6.6",
+    "@tiptap/extension-list-item": "^2.5.7",
+    "@tiptap/extension-mention": "^2.11.5",
+    "@tiptap/extension-placeholder": "^2.5.8",
+    "@tiptap/extension-task-item": "^2.11.5",
+    "@tiptap/extension-task-list": "^2.11.5",
+    "@tiptap/extension-text-style": "^2.9.1",
+    "@tiptap/extension-youtube": "^2.11.5",
+    "@tiptap/react": "^2.5.7",
+    "@tiptap/starter-kit": "^2.5.7",
+    "@tiptap/suggestion": "^2.11.5",
+    "@xyflow/react": "^12.6.0",
+    "axios": "^1.7.5",
+    "clsx": "^2.1.1",
+    "crisp-sdk-web": "^1.1.2",
+    "d3-force": "^3.0.0",
+    "debounce": "^2.1.0",
+    "dompurify": "^3.2.5",
+    "electron-debug": "^3.2.0",
+    "electron-log": "^4.4.8",
+    "electron-store": "^10.0.0",
+    "electron-updater": "^6.2.1",
+    "elkjs": "^0.9.3",
+    "escape-html": "^1.0.3",
+    "file-saver": "^2.0.5",
+    "firebase": "^10.13.1",
+    "hark": "^1.2.3",
+    "i": "^0.3.7",
+    "i18next": "^23.16.8",
+    "idb": "^8.0.0",
+    "is-hotkey": "^0.2.0",
+    "katex": "^0.16.11",
+    "lottie-react": "^2.4.1",
+    "lowlight": "^3.3.0",
+    "mammoth": "^1.9.0",
+    "markdown-it": "^14.1.0",
+    "marked": "^15.0.8",
+    "minisearch": "^6.3.0",
+    "mixpanel-browser": "^2.55.0",
+    "motion": "^12.4.2",
+    "node-forge": "^1.3.1",
+    "node-html-markdown": "^1.3.0",
+    "node-llama-cpp": "^3.18.1",
+    "node-machine-id": "^1.1.12",
+    "npm": "^10.2.5",
+    "ogl": "^1.0.11",
+    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^3.4.120",
+    "perfect-freehand": "^1.2.3",
+    "posthog-js": "^1.161.3",
+    "process": "^0.11.10",
+    "promise-worker": "^2.0.1",
+    "react": "^18.2.0",
+    "react-color": "^2.19.3",
+    "react-contenteditable": "^3.3.7",
+    "react-contexify": "^6.0.0",
+    "react-datepicker": "^7.0.0",
+    "react-dom": "^18.2.0",
+    "react-force-graph": "^1.45.4",
+    "react-hot-toast": "^2.4.1",
+    "react-hotkeys-hook": "^4.5.1",
+    "react-i18next": "^14.1.3",
+    "react-icons": "^4.12.0",
+    "react-joyride": "^2.8.2",
+    "react-modal": "^3.16.1",
+    "react-pdf": "^9.1.1",
+    "react-router-dom": "^6.16.0",
+    "react-select": "^5.8.0",
+    "react-sliding-pane": "^7.3.0",
+    "react-textarea-autosize": "^8.5.3",
+    "react-tooltip": "^5.25.1",
+    "react-use-websocket": "^4.11.1",
+    "rxdb": "^15.39.0",
+    "showdown": "^2.1.0",
+    "slate": "^0.101.5",
+    "slate-hyperscript": "^0.100.0",
+    "slate-react": "^0.101.5",
+    "tailwind-merge": "^2.5.4",
+    "tippy.js": "^6.3.7",
+    "tiptap-extension-global-drag-handle": "^0.1.10",
+    "tiptap-markdown": "^0.8.10",
+    "turndown": "^7.2.0",
+    "use-debounce": "^10.0.0",
+    "uuid": "^9.0.1",
+    "web-worker": "^1.3.0",
+    "word-extractor": "^1.0.4",
+    "xlsx": "^0.18.5",
+    "y-indexeddb": "^9.0.12",
+    "y-prosemirror": "^1.2.15",
+    "y-protocols": "^1.0.6",
+    "yjs": "^13.6.23",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@electron/notarize": "^3.1.1",
+    "@electron/rebuild": "^4.0.4",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
+    "@svgr/webpack": "^8.1.0",
+    "@teamsupercell/typings-for-css-modules-loader": "^2.5.2",
+    "@testing-library/jest-dom": "^6.1.3",
+    "@testing-library/react": "^14.0.0",
+    "@types/d3-force": "^3.0.10",
+    "@types/escape-html": "^1.0.4",
+    "@types/jest": "^29.5.5",
+    "@types/markdown-it": "^14.1.2",
+    "@types/mixpanel-browser": "^2.49.1",
+    "@types/node": "20.6.2",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@types/react-test-renderer": "^18.0.1",
+    "@types/terser-webpack-plugin": "^5.0.4",
+    "@types/turndown": "^5.0.4",
+    "@types/uuid": "^10.0.0",
+    "@types/webpack-bundle-analyzer": "^4.6.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "autoprefixer": "^10.4.16",
+    "browserslist-config-erb": "^0.0.3",
+    "chalk": "^4.1.2",
+    "concurrently": "^8.2.1",
+    "copy-webpack-plugin": "^11.0.0",
+    "core-js": "^3.32.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "detect-port": "^1.5.1",
+    "electron": "^41.2.2",
+    "electron-builder": "^26.8.1",
+    "electron-devtools-installer": "^3.2.0",
+    "electronmon": "^2.0.4",
+    "eslint": "^8.49.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-erb": "^4.1.0-0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-import-resolver-webpack": "^0.13.7",
+    "eslint-plugin-compat": "^4.2.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jest": "^27.4.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.3",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "mini-css-extract-plugin": "^2.7.6",
+    "node-loader": "^2.1.0",
+    "postcss": "^8.4.32",
+    "postcss-loader": "^7.3.3",
+    "prettier": "^3.1.0",
+    "raw-loader": "^4.0.2",
+    "react-refresh": "^0.14.0",
+    "react-test-renderer": "^18.2.0",
+    "rimraf": "^5.0.1",
+    "sass": "^1.67.0",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "tailwindcss": "^2.2.19",
+    "terser-webpack-plugin": "^5.3.9",
+    "ts-jest": "^29.1.1",
+    "ts-loader": "^9.4.4",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.2.2",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.88.2",
+    "webpack-bundle-analyzer": "^4.9.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
+    "webpack-merge": "^5.9.0"
+  },
+  "build": {
+    "productName": "Constella",
+    "appId": "app.constella.constella",
+    "copyright": "Copyright © 2025 Beemo AI",
+    "buildVersion": "2.3.1",
+    "extraMetadata": {
+      "version": "2.3.1",
+      "author": "Beemo AI"
+    },
+    "asar": false,
+    "asarUnpack": "**\\*.{node,dll}",
+    "files": [
+      "dist",
+      "node_modules",
+      "package.json"
+    ],
+    "afterSign": ".erb/scripts/notarize.js",
+    "mac": {
+      "target": [
+        "default"
+      ],
+      "type": "distribution",
+      "hardenedRuntime": true,
+      "entitlements": "assets/entitlements.mac.plist",
+      "entitlementsInherit": "assets/entitlements.mac.plist",
+      "gatekeeperAssess": false,
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "For Stella Assist mode, this is needed for having conversations with your voice.",
+        "NSCameraUsageDescription": "For Stella Assist mode, this is needed for having conversations although camera is not used."
+      },
+      "publish": {
+        "provider": "s3",
+        "bucket": "aicc-bucket",
+        "region": "us-east-2",
+        "acl": null,
+        "path": "constella/publish"
+      }
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "include": "assets/check_vcredist.nsh"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Development"
+    },
+    "directories": {
+      "app": "release/app",
+      "buildResources": "assets",
+      "output": "release/build"
+    },
+    "extraResources": [
+      "./assets/**"
+    ],
+    "publish": {
+      "provider": "s3",
+      "bucket": "aicc-bucket",
+      "region": "us-east-2",
+      "acl": null,
+      "path": "constella/publish"
+    },
+    "protocols": [
+      {
+        "name": "Constella App Desktop",
+        "schemes": [
+          "constella-app-desktop"
+        ]
+      }
+    ],
+    "releaseInfo": {
+      "releaseNotes": "Auto connecting and mindmap generation!"
+    }
+  },
+  "engines": {
+    "node": ">=14.x",
+    "npm": ">=7.x"
+  },
+  "electronmon": {
+    "patterns": [
+      "!**/**",
+      "src/main/**"
+    ],
+    "logLevel": "quiet"
+  },
+  "overrides": {
+    "react-error-overlay": "6.0.9"
+  }
+}

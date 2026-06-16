@@ -1,0 +1,221 @@
+/* OpenSourceApp — base renderer styles */
+
+.oss-root {
+  position: fixed;
+  inset: 0;
+  background: #06060a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: -apple-system, 'SF Pro Display', 'Inter', sans-serif;
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+/* ── Background ──────────────────────────────────────────────────────────── */
+
+.oss-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(99, 63, 198, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(56, 189, 248, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 80% 10%, rgba(168, 85, 247, 0.05) 0%, transparent 60%);
+}
+
+.oss-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -58%);
+  background: radial-gradient(circle, rgba(99, 63, 198, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Particles ───────────────────────────────────────────────────────────── */
+
+.oss-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.oss-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(160, 130, 255, 0.6);
+  animation: oss-float linear infinite;
+}
+
+@keyframes oss-float {
+  0%   { transform: translateY(0px) scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-120px) scale(0.6); opacity: 0; }
+}
+
+/* ── Center layout ───────────────────────────────────────────────────────── */
+
+.oss-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  -webkit-app-region: no-drag;
+}
+
+/* ── Orb ─────────────────────────────────────────────────────────────────── */
+
+.oss-orb-wrap {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  cursor: default;
+  transition: transform 0.3s ease;
+}
+
+.oss-orb-wrap--hovered {
+  transform: scale(1.06);
+}
+
+.oss-pulse-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  animation: oss-pulse 4.2s ease-out infinite;
+}
+
+@keyframes oss-pulse {
+  0%   { transform: scale(1);    opacity: 0.6; }
+  100% { transform: scale(1.8);  opacity: 0; }
+}
+
+.oss-orb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #0ea5e9 100%);
+  box-shadow:
+    0 0 40px rgba(124, 58, 237, 0.4),
+    0 0 80px rgba(124, 58, 237, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: oss-orb-breathe 4s ease-in-out infinite;
+}
+
+@keyframes oss-orb-breathe {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 40px rgba(124, 58, 237, 0.4), 0 0 80px rgba(124, 58, 237, 0.15), inset 0 1px 0 rgba(255,255,255,0.15); }
+  50%       { transform: scale(1.04); box-shadow: 0 0 60px rgba(124, 58, 237, 0.55), 0 0 100px rgba(124, 58, 237, 0.2), inset 0 1px 0 rgba(255,255,255,0.2); }
+}
+
+.oss-orb-inner {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+
+.oss-title {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+.oss-subtitle {
+  font-size: 15px;
+  color: rgba(160, 140, 220, 0.75);
+  margin: 0 0 28px;
+  text-align: center;
+  letter-spacing: 0.1px;
+  min-height: 22px;
+}
+
+.oss-cursor {
+  animation: oss-blink 0.9s step-end infinite;
+  color: rgba(139, 92, 246, 0.8);
+}
+
+@keyframes oss-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Divider ─────────────────────────────────────────────────────────────── */
+
+.oss-divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.4), transparent);
+  margin-bottom: 24px;
+}
+
+/* ── CTA block ───────────────────────────────────────────────────────────── */
+
+.oss-cta {
+  text-align: center;
+  max-width: 380px;
+  margin-bottom: 28px;
+}
+
+.oss-cta-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(139, 92, 246, 0.6);
+  margin: 0 0 8px;
+}
+
+.oss-cta-text {
+  font-size: 14px;
+  color: rgba(200, 190, 230, 0.8);
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+
+.oss-cta-hint {
+  font-size: 12px;
+  color: rgba(140, 130, 170, 0.5);
+  margin: 0;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ── Layer pills ─────────────────────────────────────────────────────────── */
+
+.oss-layers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  max-width: 360px;
+}
+
+.oss-layer-pill {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: rgba(139, 92, 246, 0.65);
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px solid rgba(139, 92, 246, 0.14);
+  border-radius: 20px;
+  padding: 3px 10px;
+}

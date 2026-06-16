@@ -1,0 +1,373 @@
+:root {
+  --editor-font-size: 1;
+
+  /* Base font size */
+  --base-font-size: 1rem;
+
+  /* Font sizes */
+  --font-size-base: calc(var(--base-font-size) * var(--editor-font-size));
+  --font-size-h1: calc(2.25rem * var(--editor-font-size));
+  --font-size-h2: calc(1.75rem * var(--editor-font-size));
+  --font-size-h3: calc(1.5rem * var(--editor-font-size));
+  --font-size-h4: calc(1.55rem * var(--editor-font-size));
+  --font-size-h5-h6: calc(1.4rem * var(--editor-font-size));
+  --font-size-p: calc(1.125rem * var(--editor-font-size));
+  --font-size-blockquote: calc(1.125rem * var(--editor-font-size));
+  --font-size-code-block: calc(0.75rem * var(--editor-font-size));
+  --font-size-bubble-input: calc(1rem * var(--editor-font-size));
+  --font-size-task-checkbox: calc(1.125rem * var(--editor-font-size));
+
+  /* Line heights */
+  --line-height-h1: calc(3.1rem * var(--editor-font-size));
+  --line-height-h2: calc(2.6rem * var(--editor-font-size));
+  --line-height-h3: calc(2.1rem * var(--editor-font-size));
+  --line-height-h4: calc(1.8rem * var(--editor-font-size));
+  --line-height-p: calc(1.85rem * var(--editor-font-size));
+  --line-height-blockquote: calc(1.75rem * var(--editor-font-size));
+  --line-height-code-block: calc(1rem * var(--editor-font-size));
+  --line-height-bubble-input: calc(1.5rem * var(--editor-font-size));
+}
+
+.tiptap {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  font-size: var(--font-size-base);
+}
+
+.tiptap-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.tiptap :first-child {
+  margin-top: 0;
+}
+
+/* Add bottom margin to last element in editor for better spacing */
+.tiptap > *:last-child {
+  padding-bottom: 30px;
+}
+
+.tiptap img {
+  border-radius: 0.3rem;
+  max-height: 50%;
+}
+
+/* List styles */
+.tiptap ul:not([data-type='taskList']),
+.tiptap ol {
+  padding: 0 1rem;
+  margin: 1.25rem 1rem 1.25rem 0.4rem;
+}
+
+.tiptap ul:not([data-type='taskList']) li {
+  list-style: circle;
+}
+
+.tiptap ol li {
+  list-style: decimal;
+}
+
+.tiptap ul li p,
+.tiptap ol li p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.tiptap ul[data-type='taskList'] li {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.tiptap blockquote {
+  padding: 0.5rem 0.75rem;
+  color: var(--overlay-white-12);
+  font-size: var(--font-size-blockquote);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--line-height-blockquote);
+  border-left: 3px solid rgba(255, 255, 255, 0.8);
+  background: var(--overlay-white-5, rgba(255, 255, 255, 0.09));
+}
+
+/* ----------------------------- */
+/* Light theme overrides         */
+/* ----------------------------- */
+.tiptap-light-theme blockquote {
+  background: #f5f5f5 !important; /* soft light-grey background */
+  color: #000 !important; /* black text for readability */
+  border-left: 3px solid rgba(0, 0, 0, 0.3) !important;
+}
+
+.tiptap-light-theme .tiptap-code-block {
+  background: #efefef !important; /* subtle light background for code */
+  color: #000 !important; /* black text */
+}
+
+/* 
+
+Displaying an icon next to the blockquote if ever needed again.
+
+blockquote {
+  position: relative;
+}
+
+
+blockquote::before {
+  font-family: Arial;
+  content: '\201C';
+  color: #78c0a8;
+  font-size: 4em;
+  position: absolute;
+  left: 20px;
+  top: -10px;
+} */
+
+blockquote::after {
+  content: '';
+}
+
+.tiptap hr {
+  border: none;
+  border-top: 1px solid var(--gray-2);
+  margin: 2rem 0;
+}
+
+.tiptap .node-rootblock:not(:first-child) {
+  min-height: 21px;
+}
+
+/* .tiptap .node-rootblock {
+  pointer-events: none;
+} */
+
+.tippy-box {
+  background: none !important;
+}
+
+.tippy-content {
+  background: none !important;
+}
+
+.tippy-arrow {
+  display: none !important;
+}
+
+.tiptap h1 {
+  font-size: var(--font-size-h1);
+  font-style: normal;
+  font-weight: 450;
+  line-height: var(--line-height-h1);
+  color: var(--overlay-white-11);
+}
+
+.tiptap h2 {
+  font-size: var(--font-size-h2);
+  font-style: normal;
+  font-weight: 450;
+  line-height: var(--line-height-h2);
+  color: var(--overlay-white-11);
+}
+
+.tiptap h3 {
+  font-size: var(--font-size-h3);
+  font-style: normal;
+  font-weight: 450;
+  line-height: var(--line-height-h3);
+  color: var(--overlay-white-11);
+}
+
+.tiptap h4 {
+  font-size: var(--font-size-h4);
+  font-weight: 500;
+  line-height: var(--line-height-h4);
+}
+
+.tiptap h5,
+h6 {
+  font-size: var(--font-size-h5-h6);
+  font-weight: 500;
+}
+
+.tiptap h5,
+.tiptap h6 {
+  font-size: var(--font-size-h5-h6);
+}
+
+.tiptap p {
+  color: var(--overlay-white-12);
+  font-size: var(--font-size-p);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--line-height-p);
+}
+
+/* Tag Suggestions */
+.tag-suggestion-list {
+  min-width: 150px;
+  max-width: 150px;
+  border-radius: 1.25rem;
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0px 8px 8px 0px rgba(255, 255, 255, 0.1) inset,
+    0px 0px 32px 0px rgba(0, 0, 0, 0.05);
+  max-height: 300px;
+  overflow-y: auto;
+  top: 105%;
+  padding: 1rem 0.25rem;
+  overflow-x: hidden;
+}
+
+.tag-item {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  margin: 2px 0;
+}
+
+.tag-item.is-selected {
+  border-radius: 0.5rem;
+  border: 0.5px solid var(--overlay-white-8, rgba(255, 255, 255, 0.25));
+  background: var(--overlay-white-6, rgba(255, 255, 255, 0.12));
+}
+
+.tag-item:hover {
+  border-radius: 0.5rem;
+  border: 0.5px solid var(--overlay-white-8, rgba(255, 255, 255, 0.25));
+  background: var(--overlay-white-6, rgba(255, 255, 255, 0.12));
+}
+
+.tag-mention {
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.3rem;
+  text-decoration: none;
+  color: var(--tag-color);
+  background-color: color-mix(in srgb, var(--tag-color) 10%);
+}
+
+.tiptap-task-item > label input[type='checkbox'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.tiptap ul[data-type='taskList'] li {
+  align-items: center;
+}
+
+.tiptap-task-item > label span {
+  border-radius: 0.25rem;
+  border: 0.5px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.5);
+  background: none;
+  width: var(--font-size-task-checkbox);
+  height: var(--font-size-task-checkbox);
+  color: var(--overlay-white-12);
+  display: inline-block;
+}
+
+.tiptap-task-item > label input[type='checkbox']:checked {
+  /* background: var(--overlay-White-6, rgba(46 255 147 / 0.62)); */
+  background: url('../../../assets/img/icons/todo-check.png') !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: var(--editor-font-size);
+}
+
+.tiptap-task-item > label input[type='checkbox']:checked + span {
+  /* background: var(--overlay-White-6, rgba(46 255 147 / 0.62)); */
+  background-image: url('../../../assets/img/icons/todo-check.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: var(--editor-font-size);
+}
+
+.tiptap-code-block {
+  border-radius: 0.75rem;
+  background: var(--overlay-Black-10, rgba(0, 0, 0, 0.48));
+  padding: 0.6rem 0.85rem;
+  font-size: var(--font-size-code-block);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--line-height-code-block);
+  color: var(--overlay-white-12);
+}
+
+.editor-bubble-menu {
+  min-width: 370px;
+}
+
+.bubble-content-input {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: var(--font-size-bubble-input);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--line-height-bubble-input);
+  color: var(--overlay-white-12);
+}
+
+.bubble-content-filter {
+  position: absolute;
+  z-index: 40;
+  top: 100%;
+  left: 0;
+  width: 13rem;
+  height: 17rem;
+  border-radius: 0.5rem;
+}
+
+.bubble-content-item:hover {
+  border-radius: 0.25rem;
+  border: 0.5px solid rgba(255, 255, 255, 0.25) !important;
+  background: var(--overlay-black-5, rgba(0, 0, 0, 0.09));
+}
+
+/* Add a spacer element at the bottom of the editor content */
+.note-content-editor-container .tiptap::after {
+  content: '';
+  display: block;
+  height: 1rem; /* Create empty space at the bottom */
+}
+
+.slash-command-item {
+  border-radius: 0.25rem;
+  border: 0.5px solid transparent;
+}
+
+.slash-command-item:hover,
+.selected-hover-item {
+  border-radius: 0.25rem;
+  border: 0.5px solid rgba(255, 255, 255, 0.25);
+  background: var(--overlay-Black-5, rgba(0, 0, 0, 0.09));
+}
+
+.tiptap > div > iframe {
+  width: 100% !important;
+}
+
+/* Ensure list bullets/numbers follow theme text color */
+.tiptap ul li::marker,
+.tiptap ol li::marker {
+  color: var(--overlay-white-11);
+}
+
+.tiptap-light-theme p a,
+.tiptap-light-theme .editor-link {
+  color: #0066cc !important; /* darker blue for light theme */
+}

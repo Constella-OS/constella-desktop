@@ -1,0 +1,585 @@
+/* ... existing code ... */
+
+/* Blob Animation Background */
+:root {
+  --shape-1: 'M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z';
+  --shape-2: 'M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z';
+  --shape-3: 'M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z';
+  --shape-4: 'M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z';
+  --shape-5: 'M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z';
+  --shape-6: 'M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z';
+}
+
+.container,
+.palette-1 {
+  --bg-0: transparent; /* Remove background color */
+  --bg-1: transparent; /* Remove background color */
+  --blob-1: rgba(142, 227, 253, 0.55); /* Light blue with low opacity */
+  --blob-2: rgba(128, 203, 196, 0.62); /* Teal with low opacity */
+  --blob-3: rgba(176, 234, 255, 0.62); /* Lighter blue with low opacity */
+  --blob-4: rgba(255, 255, 255, 0.68); /* White with very low opacity */
+}
+
+.palette-2 {
+  --bg-0: #545454;
+  --bg-1: #150513;
+  --blob-1: #ff3838;
+  --blob-2: #ff9d7c;
+  --blob-3: #ffdda0;
+  --blob-4: #fff6ea;
+}
+
+/* ... other palette classes remain the same ... */
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  background: var(--bg-1);
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 1000ms ease;
+}
+
+.container::after {
+  position: absolute;
+  content: '';
+  width: min(50vw, 50vh);
+  height: min(50vw, 50vh);
+  background: var(--bg-0);
+  border-radius: 50%;
+  filter: blur(10rem);
+  transition: background 500ms ease;
+}
+
+.blobs svg {
+  position: relative;
+  height: 100%;
+  z-index: 2;
+}
+
+.blobs .blob {
+  animation: rotate 25s infinite alternate ease-in-out;
+  transform-origin: 50% 50%;
+  opacity: 0.7;
+}
+
+.blobs .blob path {
+  animation: blob-anim-1 5s infinite alternate
+    cubic-bezier(0.45, 0.2, 0.55, 0.8);
+  transform-origin: 50% 50%;
+  transform: scale(0.8);
+  transition: fill 800ms ease;
+}
+
+.blobs .blob.alt {
+  animation-direction: alternate-reverse;
+  opacity: 0.3;
+}
+
+/* ... blob specific classes and animations ... */
+
+@keyframes blob-anim-1 {
+  0% {
+    d: path(var(--shape-1));
+  }
+  30% {
+    d: path(var(--shape-2));
+  }
+  70% {
+    d: path(var(--shape-3));
+  }
+  100% {
+    d: path(var(--shape-4));
+  }
+}
+
+/* ... other blob animations ... */
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.switcher {
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.switcher .switch-button {
+  cursor: pointer;
+  width: min(10vh, 5rem);
+  height: min(10vh, 5rem);
+  background: radial-gradient(var(--bg-0), var(--bg-1));
+  border-radius: 0.5rem;
+  backdrop-filter: blur(1rem);
+  border: 1px solid rgba(120, 120, 120, 0.5);
+}
+
+/* Blob-specific classes */
+.blobs .blob-1 path {
+  fill: var(--blob-1);
+  filter: blur(1rem);
+}
+
+.blobs .blob-2 {
+  animation-duration: 18s;
+  animation-direction: alternate-reverse;
+}
+
+.blobs .blob-2 path {
+  fill: var(--blob-2);
+  animation-name: blob-anim-2;
+  animation-duration: 7s;
+  filter: blur(0.75rem);
+  transform: scale(0.78);
+}
+
+.blobs .blob-2.alt {
+  animation-direction: alternate;
+}
+
+.blobs .blob-3 {
+  animation-duration: 23s;
+}
+
+.blobs .blob-3 path {
+  fill: var(--blob-3);
+  animation-name: blob-anim-3;
+  animation-duration: 6s;
+  filter: blur(0.5rem);
+  transform: scale(0.76);
+}
+
+.blobs .blob-4 {
+  animation-duration: 31s;
+  animation-direction: alternate-reverse;
+  opacity: 0.9;
+}
+
+.blobs .blob-4 path {
+  fill: var(--blob-4);
+  animation-name: blob-anim-4;
+  animation-duration: 10s;
+  filter: blur(10rem);
+  transform: scale(0.5);
+}
+
+.blobs .blob-4.alt {
+  animation-direction: alternate;
+  opacity: 0.8;
+}
+
+/* Additional blob animations */
+@keyframes blob-anim-2 {
+  0% {
+    d: path(var(--shape-3));
+  }
+  40% {
+    d: path(var(--shape-5));
+  }
+  80% {
+    d: path(var(--shape-2));
+  }
+  100% {
+    d: path(var(--shape-6));
+  }
+}
+
+@keyframes blob-anim-3 {
+  0% {
+    d: path(var(--shape-2));
+  }
+  35% {
+    d: path(var(--shape-4));
+  }
+  75% {
+    d: path(var(--shape-6));
+  }
+  100% {
+    d: path(var(--shape-3));
+  }
+}
+
+@keyframes blob-anim-4 {
+  0% {
+    d: path(var(--shape-4));
+  }
+  30% {
+    d: path(var(--shape-6));
+  }
+  70% {
+    d: path(var(--shape-2));
+  }
+  100% {
+    d: path(var(--shape-5));
+  }
+}
+
+/* Speaking state animations */
+.blobs.speaking .blob {
+  animation-duration: 15s; /* Speed up the base rotation */
+}
+
+.blobs.speaking .blob path {
+  animation-duration: 3s; /* Faster morphing when speaking */
+}
+
+/* Enhanced blob behaviors when speaking */
+.blobs.speaking .blob-1 path {
+  filter: blur(1.5rem);
+  transform: scale(0.85);
+  opacity: 0.8;
+  animation: blob-anim-1 3s infinite alternate-reverse
+    cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.blobs.speaking .blob-2 path {
+  filter: blur(1.25rem);
+  transform: scale(0.82);
+  opacity: 0.7;
+  animation: blob-anim-2 4s infinite alternate
+    cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.blobs.speaking .blob-3 path {
+  filter: blur(1.35rem);
+  transform: scale(0.8);
+  opacity: 0.75;
+  animation: blob-anim-3 3.5s infinite alternate-reverse
+    cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.blobs.speaking .blob-4 path {
+  filter: blur(8rem);
+  transform: scale(0.6);
+  opacity: 0.9;
+  animation: blob-anim-4 5s infinite alternate
+    cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+/* Pulsing glow effect when speaking */
+@keyframes speaking-pulse {
+  0% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  50% {
+    filter: brightness(1.2);
+    transform: scale(1.1);
+  }
+  100% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+}
+
+/* Add subtle color shifts when speaking */
+.blobs.speaking {
+  animation: speaking-pulse 2s infinite ease-in-out;
+}
+
+.blobs.speaking .blob-1 path {
+  --blob-1: rgba(162, 237, 255, 0.45); /* Brighter blue */
+}
+
+.blobs.speaking .blob-2 path {
+  --blob-2: rgba(148, 223, 216, 0.4); /* Brighter teal */
+}
+
+.blobs.speaking .blob-3 path {
+  --blob-3: rgba(196, 244, 255, 0.32); /* Brighter light blue */
+}
+
+.blobs.speaking .blob-4 path {
+  --blob-4: rgba(255, 255, 255, 0.25); /* Brighter white */
+}
+
+/* Add particle effects */
+@keyframes particle-float {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x, 20px), var(--y, -20px)) scale(0);
+    opacity: 0;
+  }
+}
+
+.blobs.speaking::before,
+.blobs.speaking::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: particle-float 3s infinite ease-out;
+}
+
+.blobs-light.speaking::before,
+.blobs-light.speaking::after {
+  background: rgba(0, 150, 160, 0.1) !important;
+}
+
+.blobs.speaking::before {
+  --x: 30px;
+  --y: -25px;
+  animation-delay: -1.5s;
+}
+
+.blobs.speaking::after {
+  --x: -20px;
+  --y: -30px;
+  animation-delay: -0.5s;
+}
+
+.stella-side-bar {
+  cursor: default !important;
+}
+
+@media (max-width: 768px) {
+  .stella-side-bar--windows-md {
+    transform: scale(0.5);
+    transform-origin: bottom right;
+  }
+}
+
+/* Message Animations */
+@keyframes sendMessageAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: bottom right;
+    border-radius: 50%;
+  }
+  30% {
+    opacity: 1;
+    transform: scale(0.7);
+    border-radius: 40%;
+  }
+  70% {
+    transform: scale(1.05);
+    border-radius: 18px;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    border-radius: 18px;
+  }
+}
+
+@keyframes receiveMessageAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: bottom left;
+    border-radius: 50%;
+  }
+  30% {
+    opacity: 1;
+    transform: scale(0.7);
+    border-radius: 40%;
+  }
+  70% {
+    transform: scale(1.05);
+    border-radius: 18px;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    border-radius: 18px;
+  }
+}
+
+/* AI thinking animation */
+.ai-thinking {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-thinking-outer {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(146, 249, 255, 0.2);
+  animation: pulseAndRotate 3s infinite linear;
+}
+
+.ai-thinking-middle {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(146, 249, 255, 0.3);
+  animation: pulseAndRotateReverse 2.5s infinite linear;
+}
+
+.ai-thinking-inner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgba(146, 249, 255, 0.9);
+  border-radius: 50%;
+  animation: innerPulse 2s infinite ease-in-out;
+  box-shadow: 0 0 15px 5px rgba(146, 249, 255, 0.5);
+}
+
+@keyframes pulseAndRotate {
+  0% {
+    transform: rotate(0deg) scale(0.9);
+    border-color: rgba(146, 249, 255, 0.1);
+    border-top-color: rgba(146, 249, 255, 0.8);
+    border-right-color: rgba(146, 249, 255, 0.6);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+    border-color: rgba(146, 249, 255, 0.2);
+    border-top-color: rgba(146, 249, 255, 0.9);
+    border-right-color: rgba(146, 249, 255, 0.7);
+  }
+  100% {
+    transform: rotate(360deg) scale(0.9);
+    border-color: rgba(146, 249, 255, 0.1);
+    border-top-color: rgba(146, 249, 255, 0.8);
+    border-right-color: rgba(146, 249, 255, 0.6);
+  }
+}
+
+@keyframes pulseAndRotateReverse {
+  0% {
+    transform: rotate(360deg) scale(1.1);
+    border-color: rgba(146, 249, 255, 0.2);
+    border-left-color: rgba(146, 249, 255, 0.8);
+    border-bottom-color: rgba(146, 249, 255, 0.6);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.9);
+    border-color: rgba(146, 249, 255, 0.1);
+    border-left-color: rgba(146, 249, 255, 0.9);
+    border-bottom-color: rgba(146, 249, 255, 0.7);
+  }
+  100% {
+    transform: rotate(0deg) scale(1.1);
+    border-color: rgba(146, 249, 255, 0.2);
+    border-left-color: rgba(146, 249, 255, 0.8);
+    border-bottom-color: rgba(146, 249, 255, 0.6);
+  }
+}
+
+@keyframes innerPulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.6;
+    box-shadow: 0 0 8px 2px rgba(146, 249, 255, 0.4);
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+    box-shadow: 0 0 20px 8px rgba(146, 249, 255, 0.7);
+  }
+  100% {
+    transform: scale(0.7);
+    opacity: 0.6;
+    box-shadow: 0 0 8px 2px rgba(146, 249, 255, 0.4);
+  }
+}
+
+/* Pop animation for copy button */
+@keyframes pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pop {
+  animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.thinking-container-glow {
+  box-shadow: 0 0 15px 1px rgba(146, 249, 255, 0.2);
+  animation: containerGlowPulse 2s infinite ease-in-out;
+}
+
+@keyframes containerGlowPulse {
+  0% {
+    box-shadow: 0 0 15px 1px rgba(146, 249, 255, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 20px 4px rgba(146, 249, 255, 0.3),
+      inset 0 0 10px rgba(146, 249, 255, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 15px 1px rgba(146, 249, 255, 0.1);
+  }
+}
+
+.resize-sidebar {
+  cursor: ew-resize !important;
+}
+
+.resize-sidebar:hover {
+  border-left: 6px solid rgba(146, 249, 255, 0.2) !important;
+}
+
+.resize-sidebar-light:hover {
+  border-left: 6px solid rgba(0, 0, 0, 0.1) !important;
+  border-right: 2px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.chat-item:hover {
+  background: var(--overlay-black-8) !important;
+}
+
+.chat-item-light:hover {
+  background: rgba(0, 0, 0, 0.03) !important;
+}
+
+.chat-title-option:hover {
+  background: var(--overlay-black-8, rgba(0, 0, 0, 0.22));
+}
+
+.chat-title-option-light:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+.search-chats-input::placeholder {
+  color: var(--overlay-white-11);
+}
+
+.stella-chat-input {
+  color: var(--overlay-white-12);
+}

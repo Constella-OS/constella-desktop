@@ -1,0 +1,1025 @@
+/* Context Menu */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.constella-context-menu-in {
+  animation: fadeInUp 0.2s ease;
+}
+
+.constella-context-menu-out {
+  animation: fadeOutDown 0.2s ease;
+}
+
+.constella-context-menu-option:hover {
+  transition: background-color 0.1s ease;
+  background-color: rgb(59 131 246);
+}
+
+/* Note Card Textarea */
+
+.related-note-option {
+  border: 0.5px solid transparent;
+}
+
+.related-note-option:hover,
+.related-note-option-selected {
+  border-radius: 0.5rem;
+  border: 0.5px solid var(--overlay-black-12);
+  padding-left: 0.95rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cosmos-related-note-option {
+  border: 0.5px solid transparent;
+}
+
+.cosmos-related-note-option:hover,
+.cosmos-related-note-option-selected {
+  border-radius: 0.5rem;
+  border: 0.5px solid var(--overlay-white-8, rgba(255, 255, 255, 0.25)) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.backlink-note-option {
+  border: 0.5px solid transparent;
+}
+
+.backlink-note-option:hover,
+.backlink-note-option-selected {
+  transition: background-color 0.1s ease;
+  border: 0.5px solid rgba(255, 255, 255, 0.45);
+  padding-left: 0.95rem;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.toolbar-custom-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+.has-daily-note {
+  position: relative;
+  border: 0.5px solid var(--overlay-White-5, rgba(255, 255, 255, 0.09));
+  border-radius: 6.25rem;
+}
+
+/* .has-daily-note::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 0.5px solid var(--overlay-White-5, rgba(255, 255, 255, 0.09));
+  border-radius: 6.25rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+/* Flow Context Menu Animations */
+@keyframes flowMenuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Custom Context Menu */
+.flow-context-menu {
+  animation: flowMenuFadeIn 500ms cubic-bezier(0.17, 0.67, 0.29, 1.22) forwards;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0px -2px 4px -1px rgba(255, 255, 255, 0.15);
+  position: fixed;
+  z-index: 10;
+  padding: 0.75rem 0.5rem !important;
+  gap: 0.75rem !important;
+  opacity: 0.95 !important;
+  border-radius: 0.75rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  ) !important;
+  color: #fff;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+
+.flow-context-menu-item {
+  opacity: 0;
+  animation: flowMenuItemSlideIn 500ms cubic-bezier(0.17, 0.67, 0.29, 1.22)
+    forwards;
+}
+
+.flow-context-menu-item:nth-child(1) {
+  animation-delay: 0ms;
+}
+.flow-context-menu-item:nth-child(2) {
+  animation-delay: 30ms;
+}
+.flow-context-menu-item:nth-child(3) {
+  animation-delay: 60ms;
+}
+.flow-context-menu-item:nth-child(4) {
+  animation-delay: 90ms;
+}
+.flow-context-menu-item:nth-child(5) {
+  animation-delay: 120ms;
+}
+
+@keyframes flowMenuItemSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Enhance hover effects */
+.flow-context-menu-item {
+  transition: all 200ms cubic-bezier(0.17, 0.67, 0.29, 1.22);
+}
+
+.flow-context-menu-item:hover {
+  transform: scale(1.02) translateX(4px);
+  background: var(--overlay-White-6, rgba(255, 255, 255, 0.12));
+  border: 0.5px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+.flow-context-menu-item:hover img {
+  transform: scale(1.2) rotate(8deg);
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+  transition: all 300ms cubic-bezier(0.17, 0.67, 0.29, 1.22);
+}
+
+.edge-label::placeholder {
+  color: rgba(233 233 233 / 0.75);
+}
+
+.edge-label-icon:hover {
+  background: var(--overlay-white-6, rgba(255, 255, 255, 0.12));
+}
+
+.text-suggestion-item:hover {
+  transform: scale(1.1);
+  transform-origin: left center;
+  transition: transform 0.2s ease;
+}
+
+.auth-input {
+  color: #6f6f6f;
+}
+
+.auth-input:focus {
+  background: rgba(255, 255, 255, 0.92);
+  box-sizing: border-box;
+  /* light/Teal/5 */
+  border: 0.07rem solid #c7ebe5;
+  box-shadow: 0rem 0rem 1.14rem 0rem rgba(68, 238, 218, 0.4);
+  outline: none;
+}
+
+.tutorial-steps-scroll-container {
+  overflow: auto;
+  scrollbar-width: none; /* For Firefox */
+}
+
+.tutorial-steps-scroll-container::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+#tutorial-link {
+  color: #0064cf;
+  text-decoration: underline;
+}
+
+.continue-button {
+  gap: 0.8rem;
+}
+
+.continue-button img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.continue-button:hover img {
+  transform: translateX(2px);
+}
+
+.continue-icon-button {
+  background: rgba(255, 255, 255, 0.92);
+  color: #171717;
+  box-shadow:
+    0rem 1.79rem 1.79rem 0rem rgba(225, 225, 225, 0.5),
+    0rem 0.43rem 0.93rem 0rem rgba(255, 255, 255, 0.6),
+    0rem -1.79rem 1.79rem 0rem rgba(225, 225, 225, 0.5),
+    -1.79rem 0rem 1.79rem 0rem rgba(255, 255, 255, 0.6);
+  height: 64px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.continue-icon-button:hover {
+  transform: scale(1.03);
+}
+
+.gradient-button {
+  background: linear-gradient(96deg, #29b3a4 8%, #10786d 145%);
+  box-shadow:
+    0rem 1.79rem 1.79rem 0rem rgba(114, 202, 192, 0.34),
+    0rem 0.43rem 0.93rem 0rem rgba(114, 202, 192, 0.39);
+  border-radius: 10px;
+  transition: background 300ms ease-in-out;
+  color: #fff;
+}
+
+.gradient-button:hover {
+  background: linear-gradient(
+    97deg,
+    rgba(41, 179, 164, 0.9) 8%,
+    rgba(16, 120, 109, 0.9) 145%
+  );
+}
+
+.ultra-gradient-button {
+  border-top: 2px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 0.5px solid #fff;
+  border-left: 1px solid #fff;
+  background: linear-gradient(
+    154deg,
+    rgba(255, 255, 255, 0.7) 1.7%,
+    rgba(255, 255, 255, 0.5) 13.58%,
+    rgba(255, 255, 255, 0.7) 64.3%,
+    rgba(255, 255, 255, 0) 78.31%,
+    rgba(255, 255, 255, 0.7) 98.3%
+  );
+  box-shadow:
+    0px -8px 16px 0px rgba(255, 255, 255, 0.63),
+    0px 8px 32px 0px rgba(255, 255, 255, 0.4) inset;
+  border-radius: 10px;
+  color: #000;
+  transition: background 1s ease-in-out;
+}
+
+.ultra-gradient-button:hover {
+  background: linear-gradient(
+    154deg,
+    rgba(255, 255, 255, 0.4) 1.7%,
+    rgba(255, 255, 255, 0.5) 13.58%,
+    rgba(255, 255, 255, 0.4) 64.3%,
+    rgba(255, 255, 255, 0) 78.31%,
+    rgba(255, 255, 255, 0.4) 98.3%
+  );
+}
+
+.search-input {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-app-region: no-drag;
+  -webkit-user-drag: none;
+}
+
+@media (max-width: 768px) {
+  .search-input--windows-md {
+    zoom: 0.5;
+  }
+}
+
+@keyframes sidebarSlideIn {
+  0% {
+    left: -5rem;
+    top: 50%;
+  }
+  100% {
+    left: 0.1rem;
+    top: 50%;
+  }
+}
+
+@keyframes sidebarSlideOut {
+  0% {
+    left: 0.1rem;
+    top: 50%;
+  }
+  100% {
+    left: -5rem;
+    top: 50%;
+  }
+}
+
+.sidebar-spring-animation {
+  animation: sidebarSlideIn 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation-fill-mode: forwards;
+}
+
+.sidebar-spring-animation-exit {
+  animation: sidebarSlideOut 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation-fill-mode: forwards;
+}
+
+.search-slider-input {
+  --slider-value: 50%; /* Default value, will be updated via JavaScript */
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.search-slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.25rem;
+  height: 1rem;
+  border-radius: 62.5rem;
+  background: var(--overlay-White-11, rgba(255, 255, 255, 0.59));
+  box-shadow:
+    0px 4px 8px 0px rgba(255, 255, 255, 0.75) inset,
+    -2px 0px 8px 0px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.search-slider-input::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.5) var(--slider-value),
+    rgba(255, 255, 255, 0.12) var(--slider-value)
+  );
+  border-radius: 624.9375rem;
+}
+
+/* Light theme slider styles */
+.search-slider-input-light::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.25rem;
+  height: 1rem;
+  border-radius: 62.5rem;
+  background: rgba(102, 198, 204, 0.75);
+  box-shadow: -2px 0px 8px 0px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.search-slider-input-light::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    90deg,
+    rgba(172, 225, 229, 0.75) var(--slider-value),
+    rgba(255, 255, 255, 0.85) var(--slider-value)
+  );
+  border-radius: 624.9375rem;
+  box-shadow: 0px 2px 12px 0px rgba(255, 255, 255, 0.25) inset;
+}
+
+/* Command Center Styles */
+.command-center-search {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.11);
+  box-shadow: 0px 0px 16px 0px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(36px);
+}
+
+.command-center-menu {
+  border-radius: 1rem;
+  background: rgba(0, 0, 0, 0.11);
+  backdrop-filter: blur(36px);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes fadeScaleIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.command-center-container {
+  border-radius: 1rem;
+  position: fixed;
+  top: 35vh; /* Position from top instead of center */
+  left: 50%;
+  transform: translateX(-50%); /* Only transform X axis */
+  z-index: 1000;
+  width: 37vw;
+  animation: slideDown 0.2s ease-out;
+}
+
+.command-menu-item {
+  transition: background-color 0.2s ease;
+}
+
+.command-menu-item:hover {
+  border: 0.1px solid rgba(0, 0, 0, 0.36) !important;
+  border-radius: 0.5rem !important;
+}
+
+/* Right Sidebar */
+@keyframes rightSidebarSlideIn {
+  0% {
+    right: -7rem;
+    top: 2.25rem;
+  }
+  100% {
+    right: 0.1rem;
+    top: 2.25rem;
+  }
+}
+
+@keyframes rightSidebarSlideOut {
+  0% {
+    right: 0.1rem;
+    top: 2.25rem;
+  }
+  100% {
+    right: -17rem;
+    top: 2.25rem;
+  }
+}
+
+.right-sidebar-spring-animation {
+  animation: rightSidebarSlideIn 600ms cubic-bezier(0.17, 1.37, 0.49, 1);
+  animation-fill-mode: forwards;
+}
+
+.right-sidebar-spring-animation-exit {
+  animation: rightSidebarSlideOut 300ms cubic-bezier(0.17, 1.37, 0.49, 1);
+  animation-fill-mode: forwards;
+}
+
+.tag-suggestion-div {
+  border: 0.5px solid rgba(255, 255, 255, 0); /* prevent resizing */
+}
+
+.tag-suggestion-div:hover,
+.selected-tag-suggestion {
+  border-radius: 0.5rem;
+  border: 0.5px solid var(--overlay-White-8, rgba(255, 255, 255, 0.25));
+  background: var(--overlay-White-6, rgba(255, 255, 255, 0.12));
+}
+
+.new-tag-selector-input::placeholder {
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: var(--overlay-white-12);
+}
+
+/* Daily Note Calendar */
+.custom-calendar {
+  border-radius: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-right: 0.5px solid rgba(255, 255, 255, 0.25);
+  border-left: 0.5px solid rgba(255, 255, 255, 0.25);
+  border-bottom: none !important;
+  background: var(--overlay-white-5-sdless-transparent, rgba(0, 0, 0, 0.39));
+  backdrop-filter: blur(16px);
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.react-datepicker__day,
+.react-datepicker__day-name {
+  width: 2.607rem;
+  height: 1.5rem;
+  margin: 0.3rem;
+  line-height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-datepicker__day:focus {
+  outline: none !important;
+}
+
+.react-datepicker__day {
+  color: var(--overlay-White-8, rgba(255, 255, 255, 0.25));
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 450;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.react-datepicker__day:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Random thing that appears to right of custom input on open */
+/* .react-datepicker__tab-loop {
+  display: none;
+} */
+
+.react-datepicker__day-name {
+  color: var(--overlay-White-10, rgba(255, 255, 255, 0.45));
+  text-align: center;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem;
+}
+
+.current-day {
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 450;
+  line-height: normal;
+  text-transform: uppercase;
+  color: var(--overlay-white-12) !important;
+}
+
+.react-datepicker__day--selected {
+  border-radius: 2.5rem;
+  background: var(--light-1, #fff);
+  color: var(--light-2, #000) !important;
+}
+
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: transparent !important;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.calendar-icon {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 1rem;
+}
+
+.month-nav-button {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.month-nav-button:disabled {
+  color: rgba(255, 255, 255, 0.15);
+  cursor: not-allowed;
+}
+
+.month-nav-button:hover:not(:disabled) {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.chevron-icon {
+  font-size: 1rem;
+}
+
+.react-datepicker__header {
+  background: transparent !important;
+}
+
+.react-datepicker__header {
+  background: transparent;
+  border-bottom: none;
+  padding: 0;
+}
+
+.react-datepicker__day-names {
+  margin-bottom: 0.5rem;
+}
+
+/* Add new icon animation styles */
+.sidebar-icon {
+  transition: all 0.2s ease;
+  transform-origin: center;
+}
+
+.sidebar-icon-expanded {
+  transform: scale(1.5);
+}
+
+.sidebar-icon-adjacent {
+  transform: scale(1.2);
+}
+
+.context-menu-button {
+  border-radius: 6.25rem;
+}
+
+.context-menu-button:hover {
+  border: 0.3px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  box-shadow: 0px 0px 8px 0px rgba(255, 255, 255, 0.1);
+}
+
+.context-menu-icon {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.context-menu-shine {
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+.context-menu-tooltip {
+  background-color: rgb(23, 23, 23);
+  color: white;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  pointer-events: none;
+  padding: 0.375rem 0.75rem;
+  border-bottom: 4px solid rgb(38, 38, 38);
+}
+
+.context-menu-glow {
+  background-color: rgba(255, 255, 255, 0.1);
+  filter: blur(8px);
+  opacity: 0;
+  transform: scale(1);
+}
+
+.context-menu-glow-active {
+  opacity: 0.4;
+  transform: scale(1.1);
+}
+
+.saved-view-item:hover {
+  border-radius: 0.5rem;
+  border: 0.5px solid var(--overlay-white-8, rgba(255, 255, 255, 0.25));
+  background: var(--overlay-white-6, rgba(255, 255, 255, 0.12));
+}
+
+/* Sidebar to Modal Animation - Fixed */
+@keyframes modalFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  /* Keeping the media query structure but using the fade animation instead */
+}
+
+.sidebar-to-modal-animation {
+  animation: modalFadeIn 400ms ease-in-out forwards;
+  z-index: 1000;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes modalBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  animation: modalBackdropFadeIn 400ms ease-in-out;
+}
+
+@keyframes modalContentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content {
+  opacity: 0;
+  animation: modalContentFadeIn 500ms ease-out 300ms forwards;
+}
+
+@keyframes modalButtonPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.modal-button {
+  animation: modalButtonPulse 2s infinite;
+  transition: all 0.3s ease;
+}
+
+.modal-button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(96deg, #29b3a4 8%, #10786d 145%);
+}
+
+@keyframes modalToSidebar {
+  0% {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 70vh;
+    border-radius: 1.25rem;
+    opacity: 1;
+  }
+  50% {
+    position: fixed;
+    left: 25%;
+    top: 50%;
+    transform: translate(-25%, -50%);
+    width: 30vw;
+    height: auto;
+    border-radius: 1rem;
+    opacity: 0.97;
+  }
+  100% {
+    position: fixed;
+    left: 0.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    height: auto;
+    border-radius: 0.75rem;
+    opacity: 0.95;
+  }
+}
+
+.modal-to-sidebar-animation {
+  animation: modalToSidebar 600ms cubic-bezier(0.17, 1.37, 0.49, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes modalBackdropFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.modal-backdrop-exit {
+  animation: modalBackdropFadeOut 400ms ease-in-out;
+}
+
+.orb-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.shiny-text {
+  color: #b5b5b5a4; /* Adjust this color to change intensity/style */
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  display: inline-block;
+  animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}
+
+.shiny-text.disabled {
+  animation: none;
+}
+
+.new-tag-selector-container:focus {
+  outline: none;
+}
+.new-tag-selector-container:focus > div > button {
+  box-shadow: 0px 0px 12px 0px rgba(255, 255, 255, 0.4);
+}
+
+[contenteditable='true']:empty:before {
+  content: attr(data-placeholder);
+  color: var(--overlay-white-6);
+  pointer-events: none;
+  text-shadow: none;
+}
+
+/* Hide border for menubar role */
+[role='menubar'] {
+  border: none;
+}
+[role='menuitem']:not(.daily-note-options-trigger) {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.daily-note-option {
+  padding: 0.62rem 0.75rem;
+}
+
+.daily-note-option:hover {
+  background: var(--overlay-black-7, rgba(0, 0, 0, 0.14));
+}
+
+.add-todo-button:focus {
+  outline: none;
+  border-radius: 0.5rem;
+  border: 1px solid white;
+}
+
+.react-joyride__tooltip > div > button:focus {
+  outline: none !important;
+}
+
+/* Light theme – related note option styles */
+.light-related-note-option {
+  border: 0.5px solid transparent;
+}
+
+.light-related-note-option:hover,
+.light-related-note-option-selected {
+  border-radius: 0.5rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  padding-left: 0.95rem;
+  /* Subtle dark-on-light background to indicate selection */
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* --------------------------------------------------------- */
+/* Light mode adjustments                                   */
+/* --------------------------------------------------------- */
+
+.custom-calendar-light {
+  /* Basic container styles */
+  border-radius: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  border-right: 0.5px solid rgba(0, 0, 0, 0.15);
+  border-left: 0.5px solid rgba(0, 0, 0, 0.15);
+  border-bottom: none !important;
+  background: #ffffff;
+  /* A very subtle blur keeps parity with dark mode design */
+  backdrop-filter: blur(8px);
+}
+
+/* Day cells */
+.custom-calendar-light .react-datepicker__day,
+.custom-calendar-light .react-datepicker__day-name {
+  color: rgba(0, 0, 0, 0.56);
+}
+
+/* Hover + keyboard selected (same rule in react-datepicker) */
+.custom-calendar-light .react-datepicker__day:hover,
+.custom-calendar-light .react-datepicker__day--keyboard-selected {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Selected day */
+.custom-calendar-light .react-datepicker__day--selected {
+  border-radius: 2.5rem;
+  background: #000;
+  color: #fff !important;
+}
+
+/* Current day highlight */
+.custom-calendar-light .current-day {
+  color: #000 !important;
+}
+
+/* When the current day is also selected, override text color to white */
+.custom-calendar-light .react-datepicker__day--selected.current-day,
+.custom-calendar-light .current-day.react-datepicker__day--selected {
+  color: #fff !important;
+}
+
+/* Days which already have a daily note (border indicator) */
+.custom-calendar-light .has-daily-note {
+  border: 0.5px solid rgba(0, 0, 0, 0.15);
+}
+
+/* Header + navigation icons */
+.custom-calendar-light .calendar-icon,
+.custom-calendar-light .chevron-icon,
+.custom-calendar-light .month-nav-button {
+  /* Make SVGs / icons appear dark on light bg */
+  filter: brightness(0) opacity(0.6);
+}
+
+.custom-calendar-light .month-nav-button:disabled {
+  filter: brightness(0) opacity(0.25);
+  cursor: not-allowed;
+}
+
+.custom-calendar-light .month-nav-button:hover:not(:disabled) {
+  filter: brightness(0) opacity(0.85);
+}
+
+/* Scale down for small screens */
+.scale-down {
+  transform: scale(0.7);
+  transform-origin: center center;
+}
+
+/* Ensure all children maintain proper scaling */
+.scale-down * {
+  /* Children inherit the parent's transform */
+}

@@ -1,0 +1,206 @@
+:root {
+  /* black */
+  --overlay-black-3: rgba(0, 0, 0, 0.05);
+  --overlay-black-4: rgba(0, 0, 0, 0.07);
+  --overlay-black-5: rgba(0, 0, 0, 0.09);
+  --overlay-black-7: rgba(0, 0, 0, 0.14);
+  --overlay-black-8: rgba(0, 0, 0, 0.22);
+  --overlay-black-9: rgba(0, 0, 0, 0.44);
+  --overlay-black-10: rgba(0, 0, 0, 0.48);
+  --overlay-black-11: rgba(0, 0, 0, 0.56);
+  --overlay-black-12: rgba(0, 0, 0, 0.91);
+
+  /* white */
+  --light-1: #fff;
+  --overlay-white-3: rgba(255, 255, 255, 0.05);
+  --overlay-white-4: rgba(255, 255, 255, 0.06);
+  --overlay-white-5: rgba(255, 255, 255, 0.09);
+  --overlay-white-6: rgba(255, 255, 255, 0.12);
+  --overlay-white-7: rgba(255, 255, 255, 0.18);
+  --overlay-white-8: rgba(255, 255, 255, 0.25);
+  --overlay-white-10: rgba(255, 255, 255, 0.45);
+  --overlay-white-11: rgba(255, 255, 255, 0.59);
+  --overlay-white-12: rgba(255, 255, 255, 0.92);
+  --overlay-white-5-less-transparent: rgba(255, 255, 255, 0.15);
+
+  /* Teal */
+  --light-teal-12: #10302b;
+}
+
+.text-medium {
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 1.4rem;
+  color: var(--overlay-white-12);
+}
+
+.caption-regular {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem;
+  color: var(--overlay-white-10);
+}
+
+.caption-medium {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 1rem;
+  color: var(--overlay-white-11);
+}
+
+.caption-semibold {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1rem;
+  color: var(--light-1);
+}
+
+.paragraph-small-regular {
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: var(--overlay-white-10);
+}
+
+.paragraph-small-medium {
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 1.25rem;
+  color: var(--light-1);
+}
+
+.paragraph-regular {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: var(--light-1);
+}
+
+.paragraph-medium {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 1.5rem;
+  color: var(--light-1);
+}
+
+.paragraph-semibold {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+  color: var(--light-1);
+}
+
+.paragraph-small-semibold {
+  color: var(--light-1, #fff);
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.25rem;
+}
+
+.paragraph-large-medium {
+  color: var(--overlay-white-11);
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.75rem;
+}
+
+.subtitle-regular {
+  color: var(--overlay-white-10, rgba(255, 255, 255, 0.45));
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.75rem;
+}
+
+.subtitle-medium {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+  color: var(--light-1);
+}
+
+.h4-semibold {
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.75rem;
+}
+
+.h5-regular {
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.25rem;
+  color: var(--overlay-white-12);
+}
+
+.h5-semibold {
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.25rem;
+  color: var(--light-1);
+}
+
+.h6-regular {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem;
+  color: var(--overlay-white-10);
+}
+
+.outline-none {
+  outline: none;
+}
+
+.outline-none:focus {
+  outline: none;
+}
+
+/*
+  Light theme overrides – when the <html> element has the `light` class we
+  want dark text on a light background. By redefining the "white" overlay
+  variables to their dark counterparts we automatically flip the text color
+  everywhere it uses these variables, without touching individual rules.
+*/
+.light-mode {
+  /* Primary text */
+  --light-1: #000;
+
+  /* Overlay "white" values now become semi-transparent black values */
+  --overlay-black-3: rgba(0, 0, 0, 0.05);
+  --overlay-black-4: rgba(255, 255, 255, 0.06);
+  --overlay-black-5: rgba(255, 255, 255, 0.09);
+  --overlay-black-7: rgba(255, 255, 255, 0.18);
+  --overlay-black-8: rgba(255, 255, 255, 0.25);
+  --overlay-black-9: rgba(255, 255, 255, 0.45);
+  --overlay-black-10: rgba(255, 255, 255, 0.48);
+  --overlay-black-11: rgba(255, 255, 255, 0.56);
+  --overlay-black-12: rgba(255, 255, 255, 0.91);
+
+  /* white */
+  --light-1: #000;
+  --overlay-white-3: rgba(255, 255, 255, 0.05);
+  --overlay-white-4: rgba(0, 0, 0, 0.07);
+  --overlay-white-5: rgba(0, 0, 0, 0.09);
+  --overlay-white-6: rgba(0, 0, 0, 0.12);
+  --overlay-white-7: rgba(0, 0, 0, 0.14);
+  --overlay-white-8: rgba(0, 0, 0, 0.22);
+  --overlay-white-10: rgba(0, 0, 0, 0.44);
+  --overlay-white-11: rgba(0, 0, 0, 0.56);
+  --overlay-white-12: rgba(0, 0, 0, 0.91);
+  --overlay-white-5-less-transparent: rgba(0, 0, 0, 0.15);
+}
